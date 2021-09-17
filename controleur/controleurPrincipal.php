@@ -19,9 +19,9 @@ else
 if(isset($_POST["login"])){
 
 	if(!empty($_POST["login"])){
-	 //verification bon mdp et login 
+	 //verification bon mdp et login
 
-		//connex bdd 
+		//connex bdd
 		$maConnex = $uneConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 
@@ -37,19 +37,19 @@ if(isset($_POST["login"])){
 
 			$_SESSION['type']=$uneConnex->type($maConnex,$_SESSION['identification'],$_POST["mdp"]);
 			$_SESSION['status']=$uneConnex->status($maConnex,$_SESSION['identification'],$_POST["mdp"]);
-			//instanciation de la classe 
-			 
+			//instanciation de la classe
+
 			$unUtilisateur= new Utilisateur("ID","nom","prenom",$_POST["login"],$_SESSION['status'],$_SESSION['type'],"idFonct","idLigue","idclub");
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
 		}
 		else{
 			//si echec affichage de l'erreur.
-			?>			
+			?>
 				<script>
-				function 
-				
+				function
+
 				alert("une erreur a etais detecté dans le mot de passe ou le login ressayez.");
-				
+
 				</script>
 			<?php
 		}
@@ -71,10 +71,9 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
-		echo var_dump($tabUtilisateur);
 
 	}
-	//menu intervenant  
+	//menu intervenant
 	if($_SESSION['type'] == "2" ){
 
 		if($_SESSION['status']=="Bénévole"){
@@ -95,9 +94,9 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
-		
+
 	}
-	//menu responsable DHR  
+	//menu responsable DHR
 	if($_SESSION['type'] == "3" ){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("contrat", "Contrat"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
@@ -109,7 +108,7 @@ if( !empty($_SESSION['identification'])){
 
 
 	}
-	//menu responsable formation 
+	//menu responsable formation
 	if($_SESSION['type'] == "4" ){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
@@ -139,8 +138,3 @@ $menuPrincipalM2L = $m2lMP->creerMenu($_SESSION['m2lMP'],'m2lMP');
 
 
 include_once dispatcher::dispatch($_SESSION['m2lMP']);
-
-
-
-
- 
