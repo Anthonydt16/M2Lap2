@@ -49,7 +49,7 @@ main {
 /*styles pour la zone gauche de la zone centrale de la page           */
 /**********************************************************************/
 .gauche {
-	display: inline-block;	
+	display: inline-block;
 	background-color: #fff0f0;
 	width: 20%;
 	vertical-align: top;
@@ -61,7 +61,7 @@ main {
 /**********************************************************************/
 .droite {
 	display: inline-block;
-	width: 80%;	
+	width: 80%;
 	font-size: 15px;
 	vertical-align: top;
 }
@@ -117,7 +117,7 @@ nav.menuPrincipal ul {
 	list-style: none;
 	padding: 0px;
  	margin: 0px;
-	font-family: Helvetica; 
+	font-family: Helvetica;
 }
 
 nav.menuPrincipal ul li {
@@ -131,7 +131,7 @@ nav.menuPrincipal ul li {
 
 nav.menuPrincipal ul li a {
   text-decoration: none;
-  color: white; 
+  color: white;
 }
 
 nav.menuPrincipal ul li a:hover {
@@ -147,7 +147,7 @@ nav.menuPrincipal ul li.actif {
 
 /****************************************************/
 /*styles pour le page d'accueil                     */
-/****************************************************/ 
+/****************************************************/
 .texteAccueil {
 	width: 70%;
 	margin-left: auto;
@@ -180,7 +180,7 @@ nav.menuPrincipal ul li.actif {
 
 /****************************************************/
 /*styles pour la zone navigation gauche             */
-/****************************************************/ 
+/****************************************************/
 
 a.anchor {
     display: block;
@@ -196,12 +196,12 @@ a.anchor {
 }
 
 .sidenav .titreListe{
-	color: black; 
+	color: black;
 	padding: 30px;
 	font-weight: bold;
- 	font-size: 22px; 
+ 	font-size: 22px;
 }
- 
+
 .sidenav ul{
   list-style: none;
   padding-left: 40px;
@@ -211,7 +211,7 @@ a.anchor {
 
 .sidenav li a {
   text-decoration: none;
-  color: grey; 
+  color: grey;
 }
 
 .sidenav li a:hover {
@@ -220,12 +220,12 @@ a.anchor {
 
 /****************************************************/
 /*styles pour les rubriques de la zone droite       */
-/****************************************************/ 
+/****************************************************/
 .articles{
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	padding-bottom: 150px;		
+	padding-bottom: 150px;
 }
 
 .article .titre{
@@ -234,7 +234,7 @@ a.anchor {
 }
 
 .article .corps{
-	background-color: #b2ebf2; 
+	background-color: #b2ebf2;
 	text-align: justify;
 	padding: 15px;
 }
@@ -257,7 +257,7 @@ a.anchor {
 
 /****************************************************/
 /*styles pour les tableaux de la zone droite        */
-/****************************************************/ 
+/****************************************************/
 
 .article .corps .tab{
 	width: 100%;
@@ -309,7 +309,7 @@ a.anchor {
 	text-align: right;
 	padding-right: 10px;
 	font-weight: bold;
-	
+
 }
 
 .connexion .ligne input{
