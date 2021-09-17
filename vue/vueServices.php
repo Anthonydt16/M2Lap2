@@ -9,6 +9,7 @@
 		<div class='droite'>
 			<?php include 'vue/services/servicesDroite.php' ;?>
 		</div>
+		
 	</main>
 	<footer>
 		<?php include 'bas.php' ;?>
