@@ -39,7 +39,8 @@ if(isset($_POST["login"])){
 			$_SESSION['status']=$uneConnex->status($maConnex,$_SESSION['identification'],$_POST["mdp"]);
 			//instanciation de la classe
 
-			$unUtilisateur= new Utilisateur("ID","nom","prenom",$_POST["login"],$_SESSION['status'],$_SESSION['type'],"idFonct","idLigue","idclub");
+			$unUtilisateur= new Utilisateur();
+			$unUtilisateur->hydrate($tabUtilisateur);
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
 		}
 		else{

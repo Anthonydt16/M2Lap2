@@ -69,5 +69,6 @@ class DBConnex extends PDO{
         $requete->bindParam(":login",$login);
         $requete->execute();
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+        return $donnee;
     }
 }
