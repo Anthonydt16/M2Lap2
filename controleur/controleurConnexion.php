@@ -4,7 +4,7 @@
 if(!$_SESSION['identification']){
 
 	$formulaireConnexion = new Formulaire('post', 'index.php', 'fConnexion', 'fConnexion');
-	 
+
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabel('Identifiant :'));
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputTexte('login', 'login', '', 1, 'Entrez votre identifiant', ''));
 	$formulaireConnexion->ajouterComposantTab();
@@ -15,10 +15,7 @@ if(!$_SESSION['identification']){
 
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
 	$formulaireConnexion->ajouterComposantTab();
-	
-	//$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerMessage($messageErreurConnexion));
-	$formulaireConnexion->ajouterComposantTab();
-	
+
 	$formulaireConnexion->creerFormulaire();
 
 	require_once 'vue/vueConnexion.php' ;
