@@ -64,11 +64,18 @@ class DBConnex extends PDO{
     }
 
     public function Utilisateur($login){
-
         $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur` where login = :login ");
         $requete->bindParam(":login",$login);
         $requete->execute();
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
+    public function contrat(){
+
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM contrat");
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
+
 }
