@@ -11,6 +11,6 @@ if(!$_SESSION['identification']){
 
 	$formulaireLigue->creerFormulaire();
 
-	require_once 'vue/vueLigue.php' ;
+	require_once 'vue/vueLigues.php' ;
 
 }
