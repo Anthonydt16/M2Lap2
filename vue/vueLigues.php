@@ -3,7 +3,9 @@
 		<?php include 'haut.php' ;?>
 	</header>
 	<main>
-		<p >weshhhh</p>
+		<?php
+			$formulaireLigue->afficherFormulaire();
+		?>
 	</main>
 	<footer>
 		<?php include 'bas.php' ;?>
