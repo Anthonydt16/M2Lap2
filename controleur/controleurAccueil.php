@@ -1,3 +1,3 @@
 <?php
 
-require_once 'vue/vueAccueil.php' ;
+require_once 'vue/vueAccueil.php' ;;
