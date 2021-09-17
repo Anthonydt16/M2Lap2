@@ -1,6 +1,7 @@
 <?php
 class Utilisateur{
 //attribut
+    use hydrate; 
     private $idUser;
     private $nom;
     private $prenom;
@@ -11,14 +12,14 @@ class Utilisateur{
     private $idLigue;
     private $idClub;
 
-    //constructeur 
+    //constructeur
     public function __construct($pId, $pnom, $pprenom, $plogin, $pstatut, $ptypeUser, $pidFonct, $pidLigue, $pidClub){
-        //on initialise l'objet 
+        //on initialise l'objet
         $idUse = $pId;
         $nom = $pnom;
         $prenom = $pprenom;
         $login = $plogin;
-        $statut = $pstatut; 
+        $statut = $pstatut;
         $typeUser = $ptypeUser;
         $idFonct = $pidFonct;
         $idLigue = $pidLigue;
