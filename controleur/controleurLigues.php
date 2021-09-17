@@ -1,6 +1,6 @@
 <?php
 
-if(!$_SESSION['identification']){
+
 
 	$formulaireLigue = new Formulaire('post', 'index.php', 'fLigue', 'fLigue');
 
@@ -12,5 +12,3 @@ if(!$_SESSION['identification']){
 	$formulaireLigue->creerFormulaire();
 
 	require_once 'vue/vueLigues.php' ;
-
-}
