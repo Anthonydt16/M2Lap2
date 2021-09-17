@@ -83,7 +83,7 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
 		elseif($_SESSION['status']=="salarié"){
@@ -92,7 +92,7 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
 
