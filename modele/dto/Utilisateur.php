@@ -1,6 +1,7 @@
 <?php
 class Utilisateur{
 //attribut
+    use hydrate;
     private $idUser;
     private $nom;
     private $prenom;
@@ -11,92 +12,82 @@ class Utilisateur{
     private $idLigue;
     private $idClub;
 
-    //constructeur 
-    public function __construct($pId, $pnom, $pprenom, $plogin, $pstatut, $ptypeUser, $pidFonct, $pidLigue, $pidClub){
-        //on initialise l'objet 
-        $idUse = $pId;
-        $nom = $pnom;
-        $prenom = $pprenom;
-        $login = $plogin;
-        $statut = $pstatut; 
-        $typeUser = $ptypeUser;
-        $idFonct = $pidFonct;
-        $idLigue = $pidLigue;
-        $idClub = $idLigue;
+    //constructeur
+    public function __construct(){
 
     }
 
     //methode d'utilisateur
 	public function getIdUser() {
-		return $this->$idUser;
+		return $this->idUser;
 	}
 
 	public function setIdUser($idUser) {
-		$this->$idUser = $idUser;
+		$this->idUser = $idUser;
 	}
 
     public function getNom() {
-		return $this->$nom;
+		return $this->nom;
 	}
 
 	public function setNom( $nom) {
-		$this->$nom = $nom;
+		$this->nom = $nom;
 	}
 
 	public function getPrenom() {
-		return $this->$prenom;
+		return $this->prenom;
 	}
 
     public function setPrenom( $prenom) {
-		$this->$prenom = $prenom;
+		$this->prenom = $prenom;
 	}
 
 	public function getLogin() {
-		return $this->$login;
+		return $this->login;
 	}
 
 	public function setLogin( $login) {
-		$this->$login = $login;
+		$this->login = $login;
 	}
 
 	public function getStatut() {
-		return $this->$statut;
+		return $this->statut;
 	}
 
 	public function setStatut( $statut) {
-		$this->$statut = $statut;
+		$this->statut = $statut;
 	}
 
 	public function getTypeUser() {
-		return $this->$typeUser;
+		return $this->typeUser;
 	}
 
 	public function setTypeUser( $typeUser) {
-		$this->$typeUser = $typeUser;
+		$this->typeUser = $typeUser;
 	}
 
 	public function getIdFonct() {
-		return $this->$idFonct;
+		return $this->idFonct;
 	}
 
 	public function setIdFonct( $idFonct) {
-		$this->$idFonct = $idFonct;
+		$this->idFonct = $idFonct;
 	}
 
 	public function getIdLigue() {
-		return $this->$idLigue;
+		return $this->idLigue;
 	}
 
 	public function setIdLigue( $idLigue) {
-		$this->$idLigue = $idLigue;
+		$this->idLigue = $idLigue;
 	}
 
 	public function getIdClub() {
-		return $this->$idClub;
+		return $this->idClub;
 	}
 
 	public function setIdClub( $idClub) {
-		$this->$idClub = $idClub;
+		$this->idClub = $idClub;
 	}
 
 
