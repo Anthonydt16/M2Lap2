@@ -78,30 +78,30 @@ if( !empty($_SESSION['identification'])){
 	if($_SESSION['type'] == "2" ){
 
 		if($_SESSION['status']=="Bénévole"){
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
-
 		}
 		elseif($_SESSION['status']=="salarié"){
-
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
 
 	}
 	//menu responsable DHR
 	if($_SESSION['type'] == "3" ){
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("contrat", "Contrat"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
@@ -111,14 +111,12 @@ if( !empty($_SESSION['identification'])){
 	}
 	//menu responsable formation
 	if($_SESSION['type'] == "4" ){
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
-
-
 	}
 
 
