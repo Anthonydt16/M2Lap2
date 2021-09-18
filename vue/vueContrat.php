@@ -3,16 +3,24 @@
 		<?php include 'haut.php' ;?>
 	</header>
 	<main>
-		<div class="card" style="width:auto;">
-				<div class="card-body">
-					<h5 class="text-center card-title text-white bg-dark">les Contrats </h5>
-					
-					</div>
-		</div>
+	<div class="accordion" id="accordionExample">
+	  <div class="accordion-item">
+	    <h2 class="accordion-header" id="headingOne">
+	      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	        Accordion Item #1
+	      </button>
+	    </h2>
+	    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+	      <div class="accordion-body">
+					<?php
+	        echo tab($tabContrat,$EnTete);
+					?>
+	      </div>
+	    </div>
+	  </div>
 
-		<p class="card-text">teste </p>
-
-	</main>
+	</div>
+</main>
 	<footer>
 		<?php include 'bas.php' ;?>
 	</footer>

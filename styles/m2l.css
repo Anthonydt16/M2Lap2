@@ -15,7 +15,6 @@ html, body {
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
-	font-size: 0px;
 }
 
 /****************************************************/
@@ -38,7 +37,6 @@ main {
 	padding: 0px;
 	min-height: 600px;
 	background-color: #f0f0f0;
- 	font-size: 0px;
  	margin-top: 200px;
 }
 
