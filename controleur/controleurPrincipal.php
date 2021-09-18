@@ -42,6 +42,7 @@ if(isset($_POST["login"])){
 			$unUtilisateur= new Utilisateur();
 			$unUtilisateur->hydrate($tabUtilisateur);
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
+			$_SESSION['m2lMP'] = "Accueil";
 		}
 		else{
 			//si echec affichage de l'erreur.
