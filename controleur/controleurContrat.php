@@ -5,8 +5,6 @@ require_once 'lib/tab.php' ;
 $tabContrat=$uneConnex->contrat();
 $user = unserialize($_SESSION['unUtilisateur']);
 
-$EnTete = array("idContrat", "dateDebut", "dateFin", "typeContrat", "nbHeures", "idUser");
-
 
 // foreach ($tabContrat as $key) {
 //   echo "<br>".$key['idContrat'];

@@ -1,4 +1,9 @@
 <?php
+
+require_once 'modele/dao/param.php';
+require_once 'modele/dao/dBconnex.php';
+
+
 function tab($array,$enTete){
 
 
@@ -38,20 +43,29 @@ function tab($array,$enTete){
 }
 
 function menuDeroulant($tab){
-$EnTete = array("idContrat", "dateDebut", "dateFin", "typeContrat", "nbHeures", "idUser");
-  foreach($tab as $ligne){
+//nouvelle objet connex
+$uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
+$EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat");
 
+  foreach($tab as $ligne){
+    $tabNomContrat= $uneConnex->nomContrat($ligne['idContrat']);
+    foreach ($tabNomContrat as $key) {
+      $nom = $key['nom'];
+      $prenom = $key['prenom'];
+    }
+    $tabBulletin= $uneConnex->bulletin($ligne['idContrat']);
     echo'<div class="accordion" id="accordionExample">';
   	  echo'<div class="accordion-item">';
-  	   echo '<h2 class="accordion-header" id="headingOne">';
-  	     echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-  	        n°'.$ligne['idContrat'].' de contrat et lId user :'.$ligne['idUser'].'
+  	   echo '<h2 class="accordion-header" id="'.$ligne['idContrat'].'">';
+  	     echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'.$ligne['idContrat'].'" aria-expanded="true" aria-controls="collapseOne">
+  	        n° de contrat '.$ligne['idContrat'].' | nom :'.$nom.' prenom : '.$prenom.'
   	      </button>';
   	  echo  '</h2>';
-  	    echo'<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
+  	    echo'<div id="collapse'.$ligne['idContrat'].'" class="accordion-collapse collapse show" aria-labelledby="'.$ligne['idContrat'].'" data-bs-parent="#accordionExample">';
   	    echo  '<div class="accordion-body">';
 
-  	         echo tab($tab,$EnTete);
+
+  	         echo tab($tabBulletin,$EnTete,);
 
   	     echo '</div>';
   	   echo '</div>';
