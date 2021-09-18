@@ -38,26 +38,26 @@ function tab($array,$enTete){
 }
 
 function menuDeroulant($tab){
+$EnTete = array("idContrat", "dateDebut", "dateFin", "typeContrat", "nbHeures", "idUser");
+  foreach($tab as $ligne){
 
-  foreach($array as $ligne => $value){
+    echo'<div class="accordion" id="accordionExample">';
+  	  echo'<div class="accordion-item">';
+  	   echo '<h2 class="accordion-header" id="headingOne">';
+  	     echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+  	        n°'.$ligne['idContrat'].' de contrat et lId user :'.$ligne['idUser'].'
+  	      </button>';
+  	  echo  '</h2>';
+  	    echo'<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
+  	    echo  '<div class="accordion-body">';
 
-    echo'<div class="accordion" id="accordionExample">
-  	  <div class="accordion-item">
-  	    <h2 class="accordion-header" id="headingOne">
-  	      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-  	        n°'.$value['idContrat'].' de contrat
-  	      </button>
-  	    </h2>
-  	    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-  	      <div class="accordion-body">
-  					<?php
-  	        echo tab($tabContrat,$EnTete);
-  					?>
-  	      </div>
-  	    </div>
-  	  </div>
+  	         echo tab($tab,$EnTete);
 
-  	</div>';
+  	     echo '</div>';
+  	   echo '</div>';
+  	 echo '</div>';
+
+  	echo '</div>';
   }
 
 }
