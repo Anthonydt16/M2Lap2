@@ -1,8 +1,6 @@
 <?php
 
 
-if(!$_SESSION['identification']){
-
 	$formulaireConnexion = new Formulaire('post', 'index.php', 'fConnexion', 'fConnexion');
 
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabel('Identifiant :'));
@@ -19,10 +17,3 @@ if(!$_SESSION['identification']){
 	$formulaireConnexion->creerFormulaire();
 
 	require_once 'vue/vueConnexion.php' ;
-
-}
-else{
-	//$_SESSION['identification']=[];
-	$_SESSION['m2lMP']="accueil";
-	header('location: index.php');
-}

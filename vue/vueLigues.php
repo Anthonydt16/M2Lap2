@@ -3,8 +3,16 @@
 		<?php include 'haut.php' ;?>
 	</header>
 	<main>
-		<img src="images/Bordeaux.png" alt="Logo Bordeaux">
-		<a class="btn btn-primary" href="http://localhost/code/controleurLigues?m2lMP=Bordeaux" role="button">Voir tout les club de Bordeaux</a>
+
+		<?php
+
+			foreach ($tabLigue as $key){
+				echo '<a class="btn btn-primary" id= href="http://localhost/code/controleurLigues?m2lMP='.$key['nomLigue'].' role="button">Voir tout les club de '.$key['nomLigue'].'</a>';
+		}
+
+		?>
+
+
 	</main>
 	<footer>
 		<?php include 'bas.php' ;?>
