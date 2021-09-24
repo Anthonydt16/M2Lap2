@@ -2,9 +2,21 @@
 
 require_once 'lib/tab.php' ;
 $tabContrat = [];
+$tabBulletin = [];
 $user = unserialize($_SESSION['unUtilisateur']);
+
+
+
+if(!empty($_POST['idContrat'])){
+  echo $_POST['idContrat'];
+}
+if(!empty($_POST['idBulletin'])){
+  echo $_POST['idBulletin'];
+}
+
 if($user->getIdFonct()==3){
   $tabContrat=$uneConnex->contrat();
+  $tabBulletin= $uneConnex->bulletinFull();
 
   $formulaireBulletinAndContrat = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
 	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('ajouter un bulletin'));
@@ -43,7 +55,10 @@ if($user->getIdFonct()==3){
 	$formulaireBulletinAndContrat->ajouterComposantTab();
 
 	$formulaireBulletinAndContrat->creerFormulaire();
-
+    $options =[];
+    foreach ($tabBulletin as $key) {
+      array_push($options, $key['idContrat']);
+    }
   $formulaireContrat = new Formulaire('post', 'index.php', 'fContrat', 'fContrat');
   $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('modifier un Contrat'));
   $formulaireContrat->ajouterComposantTab();
@@ -70,6 +85,23 @@ if($user->getIdFonct()==3){
   $formulaireContrat->creerFormulaire();
 
 
+
+
+
+
+
+    $formulaireSuppContrat = new Formulaire('post', '', 'fSContratModif', 'fSContratModif');
+    $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat->creerLabel('selectionner le contrat a supprimer :'));
+    $formulaireSuppContrat->ajouterComposantTab();
+    $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat->creerLabel('contrat :'));
+    $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat->creerSelect('idContrat', 'ContratSelect', 'selectionner un Contrat', $options));
+    $formulaireSuppContrat->ajouterComposantTab();
+    $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat-> creerInputSubmit('submitConnex', 'submitConnex', 'supprimer'));
+    $formulaireSuppContrat->ajouterComposantTab();
+
+    $formulaireSuppContrat->creerFormulaire();
+
+
   $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletinModif', 'fBulletinModif');
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('ajouter un bulletin'));
   $formulaireBulletin->ajouterComposantTab();
@@ -84,12 +116,26 @@ if($user->getIdFonct()==3){
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le nom de l interesser  : '));
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('nom', 'nom', '',  1, 'le nom', '', ''));
   $formulaireBulletin->ajouterComposantTab();
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
+  $formulaireBulletin->ajouterComposantTab();
 
   $formulaireBulletin->creerFormulaire();
 
+  $options =[];
+  foreach ($tabContrat as $key) {
+    array_push($options, $key['idContrat']);
+  }
 
+  $formulaireSuppBulletin = new Formulaire('post', '', 'fSBulletinModif', 'fSBulletinModif');
+  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerLabel('selectionner le bulletin a supprimer :'));
+  $formulaireSuppBulletin->ajouterComposantTab();
+  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerLabel('bulletin :'));
+  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerSelect('idBulletin', 'BulletinSelect', 'selectionner un bulletin', $options));
+  $formulaireSuppBulletin->ajouterComposantTab();
+  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin-> creerInputSubmit('submitConnex', 'submitConnex', 'supprimer'));
+  $formulaireSuppBulletin->ajouterComposantTab();
 
-
+  $formulaireSuppBulletin->creerFormulaire();
 
 }
 else{

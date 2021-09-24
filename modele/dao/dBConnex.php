@@ -93,6 +93,25 @@ class DBConnex extends PDO{
         $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
         return $donnee;
     }
+    public function bulletinSupp($idBulletin){
+
+        $requete = DBConnex::getInstance()->prepare("DELETE FROM `bulletin` WHERE `idbulletin` = :id");
+        $requete->bindParam(":id",$idBulletin);
+        $requete->execute();
+    }
+    public function contratSupp(){
+
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM `bulletin` WHERE `idbulletin` = :id");
+      $requete->bindParam(":id",$idBulletin);
+      $requete->execute();
+    }
+    public function bulletinFull(){
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM bulletin");
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
+
     public function nomContrat($idContrat){
 
         $requete = DBConnex::getInstance()->prepare("SELECT U.nom,U.prenom FROM utilisateur AS U, contrat AS C where C.idUser = U.idUser AND C.idContrat = :numIDContrat");
@@ -101,4 +120,7 @@ class DBConnex extends PDO{
         $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
         return $donnee;
     }
+
+
+
 }

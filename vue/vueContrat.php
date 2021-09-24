@@ -19,7 +19,9 @@
 	<div id='invisibleModifContrat'>
 
 			<?php
+
 			$formulaireContrat->afficherFormulaire();
+			$formulaireSuppContrat->afficherFormulaire();
 			?>
 			<button id="boutonRetourContrat" class="btn btn-primary" type="submit">Retour</button>
 	</div>
@@ -27,7 +29,11 @@
 	<div id='invisibleModifBulletin'>
 
 			<?php
+
+
 			$formulaireBulletin->afficherFormulaire();
+
+			$formulaireSuppBulletin->afficherFormulaire();
 			?>
 			<button id="boutonRetourBulletin" class="btn btn-primary" type="submit">Retour</button>
 	</div>
@@ -71,7 +77,7 @@ document.getElementById("boutonRetour")
 		document.getElementById("invisibleModifBulletin").hidden = true;
 		document.getElementById("boutonModifSuppBulletin")
 		        .addEventListener("click", function() {
-		  document.getElementById("invisible").hidden = false;
+		  document.getElementById("invisibleModifBulletin").hidden = false;
 
 		  // document.getElementById("impressionnant").hidden = false;
 		}, false);
