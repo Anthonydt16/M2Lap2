@@ -22,7 +22,7 @@ class LigueDAO extends PDO{
 
   public function getligues(){
 
-      $requete = DBConnex::getInstance()->prepare("SELECT `nomLigue` FROM `ligue`");
+      $requete = DBConnex::getInstance()->prepare("SELECT * FROM `ligue`");
       $requete->execute();
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;

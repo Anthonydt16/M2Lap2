@@ -6,8 +6,17 @@
 
 		<?php
 
-			foreach ($tabLigue as $key){
-				echo '<a class="btn btn-primary" id= href="http://localhost/code/controleurLigues?m2lMP='.$key['nomLigue'].' role="button">Voir tout les club de '.$key['nomLigue'].'</a>';
+			foreach ($tabLigue as $keyL){
+						echo '<h1>Ligue de '.$keyL['nomLigue'].'</h1>';
+						echo '<p>'.$keyL['descriptif'].'</p>';
+							foreach ($tabClub as $keyC) {
+								if($keyL['idLigue']==$keyC['idLigue']){
+									echo '<ul>';
+			  					echo '<li><a>'.$keyC['nomClub'].'</a></li>';
+									echo '<a>~'.$keyC['adresseClub'].'</a>';
+									echo '</ul>';
+								}
+						}
 		}
 
 		?>

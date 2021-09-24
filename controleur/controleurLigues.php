@@ -1,8 +1,12 @@
 <?php
-  require_once 'modele/dao/DAOLigues.php';
+  require_once 'modele/dao/LiguesDAO.php';
+  require_once 'modele/dao/ClubDAO.php';
 
   $uneLigue = new LigueDAO();
   $tabLigue = $uneLigue->getligues();
 
-  echo var_dump($tabLigue);
+  $unClub = new ClubDAO();
+  $tabClub = $unClub->getclubs();
+
+  /*echo var_dump($tabLigue);*/
 	require_once 'vue/vueLigues.php' ;
