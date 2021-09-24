@@ -49,7 +49,7 @@ $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat");
 
   foreach($tab as $ligne){
     $tabNomContrat= $uneConnex->nomContrat($ligne['idContrat']);
-    foreach ($tabNomContrat as $key) {
+    foreach ($tabNomContrat as $key){
       $nom = $key['nom'];
       $prenom = $key['prenom'];
     }
@@ -65,7 +65,7 @@ $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat");
   	    echo  '<div class="accordion-body">';
 
 
-  	         echo tab($tabBulletin,$EnTete,);
+  	         echo tab($tabBulletin,$EnTete);
 
   	     echo '</div>';
   	   echo '</div>';

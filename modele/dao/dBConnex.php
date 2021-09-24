@@ -77,6 +77,14 @@ class DBConnex extends PDO{
         $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
         return $donnee;
     }
+    public function contratUser($id){
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM contrat where idUser = :id");
+
+        $requete->bindParam(":id",$id);
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
     public function bulletin($idContrat){
 
         $requete = DBConnex::getInstance()->prepare("SELECT * FROM bulletin where idContrat = :idContrat");
