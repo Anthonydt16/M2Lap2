@@ -99,11 +99,12 @@ class DBConnex extends PDO{
         $requete->bindParam(":id",$idBulletin);
         $requete->execute();
     }
-    public function contratSupp(){
+    public function contratSupp($idContrat){
 
-      $requete = DBConnex::getInstance()->prepare("DELETE FROM `bulletin` WHERE `idbulletin` = :id");
-      $requete->bindParam(":id",$idBulletin);
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM `contrat` WHERE `idContrat` = :id");
+      $requete->bindParam(":id",$idContrat);
       $requete->execute();
+
     }
     public function bulletinFull(){
         $requete = DBConnex::getInstance()->prepare("SELECT * FROM bulletin");

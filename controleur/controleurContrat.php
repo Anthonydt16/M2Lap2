@@ -9,9 +9,12 @@ $user = unserialize($_SESSION['unUtilisateur']);
 
 if(!empty($_POST['idContrat'])){
   echo $_POST['idContrat'];
+  $uneConnex->contratSupp($_POST['idContrat']);
+
 }
 if(!empty($_POST['idBulletin'])){
   echo $_POST['idBulletin'];
+  $uneConnex->bulletinSupp($_POST['idBulletin']);
 }
 
 if($user->getIdFonct()==3){
