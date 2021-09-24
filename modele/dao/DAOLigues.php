@@ -1,5 +1,5 @@
 <?php
-class Ligue extends PDO{
+class LigueDAO extends PDO{
 
   private static $instance;
 
@@ -20,7 +20,7 @@ class Ligue extends PDO{
       }
   }
 
-  public function Ligue(){
+  public function getligues(){
 
       $requete = DBConnex::getInstance()->prepare("SELECT `nomLigue` FROM `ligue`");
       $requete->execute();
