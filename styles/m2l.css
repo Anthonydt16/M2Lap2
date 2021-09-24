@@ -357,4 +357,23 @@ style de la vue formations
 	text-decoration:none;
 	background-color: #1dcb32;
 	margin: 15px;
+	border-radius: 15px;
+	font-size: 20px;
+	box-shadow: 3px 3px 3px;
+	color : grey;
+	
+}
+
+.divBtnForma{
+		 float: left;
+     margin: 3%;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     width: 27%;
+     height: 70%;
+     background-color: #33acf1;
+		 border-radius: 15px;
+		 box-shadow: 3px 3px 3px #000;
 }
