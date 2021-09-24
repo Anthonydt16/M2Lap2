@@ -361,7 +361,7 @@ style de la vue formations
 	font-size: 20px;
 	box-shadow: 3px 3px 3px;
 	color : grey;
-	
+
 }
 
 .divBtnForma{
@@ -376,4 +376,12 @@ style de la vue formations
      background-color: #33acf1;
 		 border-radius: 15px;
 		 box-shadow: 3px 3px 3px #000;
+}
+
+.Ligue{
+	float: left;
+	margin: 2%;
+	background-color: #33acf1;
+	border-radius: 15px;
+	box-shadow: 3px 3px 3px #000;
 }

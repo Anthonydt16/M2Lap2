@@ -3,10 +3,9 @@
 		<?php include 'haut.php' ;?>
 	</header>
 	<main>
-
 		<?php
-
 			foreach ($tabLigue as $keyL){
+				echo '<div class="Ligue">';
 						echo '<h1>Ligue de '.$keyL['nomLigue'].'</h1>';
 						echo '<p>'.$keyL['descriptif'].'</p>';
 							foreach ($tabClub as $keyC) {
@@ -17,6 +16,7 @@
 									echo '</ul>';
 								}
 						}
+				echo '</div>';
 		}
 
 		?>
