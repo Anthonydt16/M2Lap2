@@ -1,0 +1,7 @@
+<?php
+require_once 'modele/dao/DemandeFormationDAO.php';
+
+$uneDemande = new DemandeFormationDAO();
+$tabDemandeFormation = $uneDemande->getdemandeformation();
+
+require_once 'vue/vueDemandeFormation.php' ;

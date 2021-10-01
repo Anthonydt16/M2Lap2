@@ -3,6 +3,7 @@ require_once 'modele/dao/param.php';
 require_once 'modele/dao/dBconnex.php';
 require_once 'modele/dto/Utilisateur.php';
 
+
 //nouvelle objet connex
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
 
@@ -46,6 +47,7 @@ if(isset($_POST["login"])){
 		}
 		else{
 			//si echec affichage de l'erreur.
+
 			?>
 				<script>
 				function
@@ -86,6 +88,7 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "Mes Formation"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
 		elseif($_SESSION['status']=="salarie"){
@@ -96,6 +99,7 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "Mes Formation"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 		}
 
@@ -118,7 +122,8 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formations", "Formations"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("demandeFormation", "Inscrits"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
 	}
 

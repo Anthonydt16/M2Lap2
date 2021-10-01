@@ -1,9 +1,11 @@
 <?php
-require_once 'modele/dao/DAOFormation.php';
+require_once 'modele/dao/FormationDAO.php';
 
 $uneFormation = new FormationDAO();
 $tabFormation = $uneFormation->getformation();
 
-/*echo var_dump($tabFormation);*/
+$uneFormationResponsable = new FormationDAO();
+$tabFormationResponsable = $uneFormationResponsable->getformationresponsable();
+
 
 require_once 'vue/vueFormation.php' ;

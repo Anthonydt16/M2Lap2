@@ -1,6 +1,11 @@
+<?php
+/*require_once 'controleur/controleurPrincipal.php';*/
+?>
 <div class="conteneur">
 	<header>
-		<?php include 'haut.php' ;?>
+		<?php include 'haut.php' ;
+		?>
+
 	</header>
 	<main>
 		<div class='texteAccueil'>
@@ -13,7 +18,7 @@
 				<img src="images/sport1.jpg" >
 				<img src="images/sport4.jpg" >
 				<img src="images/sport5.jpg" >
-		</div>	
+		</div>
 	</main>
 	<footer>
 		<?php include 'bas.php' ;?>

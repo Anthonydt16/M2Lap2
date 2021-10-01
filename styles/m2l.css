@@ -22,7 +22,7 @@ html, body {
 /****************************************************/
 header {
   height: 200px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   top: 0;
   left: 0;
@@ -107,7 +107,7 @@ footer p{
 nav.menuPrincipal{
 	text-align: right;
 	background-color: skyblue;
-	font-size: 0px;
+
 }
 
 nav.menuPrincipal ul {
@@ -336,7 +336,7 @@ style de la vue formations
 */
 
 .center-div {
-	position: absolute;
+		 position: absolute;
      margin: auto;
      top: 0;
      right: 0;
@@ -345,23 +345,23 @@ style de la vue formations
      width: 70%;
      height: 50%;
      background-color: #ccc;
-		 border-radius: 15px;
+		 border-radius: 50px;
 }
 
 .center-div .btnFormation {
-	display:block;
-	width:150px;
-	line-height:50px;
-	text-align:center;
-	vertical-align:middle;
-	text-decoration:none;
+	display: block;
+	width: 150px;
+	line-height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
 	background-color: #1dcb32;
 	margin: 15px;
 	border-radius: 15px;
 	font-size: 20px;
 	box-shadow: 3px 3px 3px;
-	color : grey;
-
+	color: grey;
+	margin: 0 auto;
 }
 
 .divBtnForma{
@@ -372,12 +372,58 @@ style de la vue formations
      bottom: 0;
      left: 0;
      width: 27%;
-     height: 70%;
+     height: 75%;
      background-color: #33acf1;
 		 border-radius: 15px;
 		 box-shadow: 3px 3px 3px #000;
 }
 
+.center-div .texteFormation{
+	margin-top: 3%;
+	text-align: center;
+}
+
+/*
+Vue formation du point de vue du gestionnaire
+*/
+
+.divBtnForma .btnSuppForma{
+	margin-top: 2%;
+	margin-right: 2%;
+	float: right;
+	width: 30px;
+	height: 30px;
+}
+
+.btnFormationAjouter{
+	margin-top: 1%;
+	display: block;
+	width: 30%;
+	line-height: 35px;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	background-color: #1dcb32;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+	font-size: 20px;
+	box-shadow: 3px 3px 3px;
+	color: grey;
+}
+
+/*
+Vue ligues
+*/
+
+.MsgNoFormation{
+	text-align: center;
+	font-size: 20px;
+	font-style: oblique;
+}
+/*
+style de la vue ligue
+*/
 .Ligue{
 	float: left;
 	margin: 2%;
