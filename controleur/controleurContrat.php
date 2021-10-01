@@ -3,89 +3,99 @@
 require_once 'lib/tab.php' ;
 $tabContrat = [];
 $tabBulletin = [];
-$user = unserialize($_SESSION['unUtilisateur']);
+//DAObulletin
+$lesBulletinDAO = new BulletinDAO();
+$lesContrat = new ContratDAO();
+
+//DAOcontrat
+$leContrat = new ContratDAO();
+if(isset($_SESSION['unUtilisateur'])){
+  $user = unserialize($_SESSION['unUtilisateur']);
 
 
 
-if(!empty($_POST['idContrat'])){
-  echo $_POST['idContrat'];
-  $uneConnex->contratSupp($_POST['idContrat']);
-
-}
-if(!empty($_POST['idBulletin'])){
-  echo $_POST['idBulletin'];
-  $uneConnex->bulletinSupp($_POST['idBulletin']);
-}
-
-if($user->getIdFonct()==3){
-  $tabContrat=$uneConnex->contrat();
-  $tabBulletin= $uneConnex->bulletinFull();
-
-  $formulaireBulletinAndContrat = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('ajouter un bulletin'));
-  $formulaireBulletinAndContrat->ajouterComposantTab();
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('Mois :'));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('Mois', 'Mois', '', 1, 'Entrez le mois', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('le bulletin en PDF : '));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('pdf', 'pdf', '',  1, 'hop ajoute je pdf', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('le nom de l interesser  : '));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('nom', 'nom', '',  1, 'le nom', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('Ajouter un Contrat'));
-  $formulaireBulletinAndContrat->ajouterComposantTab();
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('Date debut :'));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('DateDeb', 'DateDeb', '', 1, 'ajouter la date', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('la date de fin : '));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('DateFin', 'DateFin',  1, 'ajouter la date', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('le type de contrat : '));
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('contrat', 'contrat', '',  1, 'le contrat', '', ''));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('le nombre d heure : '));
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('heureNb', 'heureNb', '', 1, 'le nombre heure', '', ''));
-  $formulaireBulletinAndContrat->ajouterComposantTab();
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerLabel('le nom de l interesser  : '));
-  $formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat->creerInputTexte('nom', 'nom', '', 1, '', 'le nom', '', ''));
-  $formulaireBulletinAndContrat->ajouterComposantTab();
-	$formulaireBulletinAndContrat->ajouterComposantLigne($formulaireBulletinAndContrat-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
-	$formulaireBulletinAndContrat->ajouterComposantTab();
-
-	$formulaireBulletinAndContrat->creerFormulaire();
-    $options =[];
-    foreach ($tabBulletin as $key) {
-      array_push($options, $key['idContrat']);
+  if(!empty($_POST['idContrat'])){
+    //recuperation des id bulletin en ref au contrat
+    $tabIdBulletin = $lesBulletinDAO->groupeBulletinRapportContrat($_POST['idContrat']);
+    foreach ($tabIdBulletin as $key){
+        $lesBulletinDAO->bulletinSupp($key['idbulletin']);
     }
+
+    $leContrat->contratSupp($_POST['idContrat']);
+
+  }
+  if(!empty($_POST['idBulletin'])){
+    $lesBulletinDAO->bulletinSupp($_POST['idBulletin']);
+  }
+
+  if($user->getIdFonct()==3){
+    //recuperation donnée contrat et bulletin rh
+    $tabContrat=$leContrat->contrat();
+     $lesBulletinDAO->bulletinFull();
+
+
+  //$leContrat->hydrate($tabContrat);
+}
+else{
+  //sinon contrzt et bulletin perso
+
+  $tabContrat=$leContrat->contratUser($user->getidUser());
+
+  $tabBulletin= $lesBulletinDAO->bulletinFull();
+}
+//formulaire
+  $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('ajouter un bulletin'));
+  $formulaireBulletin->ajouterComposantTab();
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('Mois :'));
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('BMois', 'BMois', '', 1, 'Entrez le mois', '', ''));
+	$formulaireBulletin->ajouterComposantTab();
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('année :'));
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bannee', 'Bannee', '', 1, 'Entrez l année ' , '', ''));
+  $formulaireBulletin->ajouterComposantTab();
+
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le bulletin en PDF : '));
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bpdf', 'Bpdf', '',  1, 'hop ajoute je pdf', '', ''));
+	$formulaireBulletin->ajouterComposantTab();
+
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le nom de l interesser  : '));
+	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bnom', 'Bnom', '',  1, 'le nom', '', ''));
+	$formulaireBulletin->ajouterComposantTab();
+
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin-> creerInputSubmit('submitConnexBulletin', 'submitConnexBulletin', 'Valider'));
+  $formulaireBulletin->ajouterComposantTab();
+  $formulaireBulletin->creerFormulaire();
+
   $formulaireContrat = new Formulaire('post', 'index.php', 'fContrat', 'fContrat');
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('modifier un Contrat'));
-  $formulaireContrat->ajouterComposantTab();
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('Date debut :'));
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('DateDeb', 'DateDeb', '', 1, 'ajouter la date', '', ''));
+
+  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('Ajouter un Contrat'));
   $formulaireContrat->ajouterComposantTab();
 
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('le bulletin en PDF : '));
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('DateFin', 'DateFin',  1, 'ajouter la date', '', ''));
+	$formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('Date debut :'));
+	$formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('ADateDeb', 'ADateDeb', '', 1, 'ajouter la date', '', ''));
+	$formulaireContrat->ajouterComposantTab();
+
+  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('Date Fin :'));
+  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('DateFin', 'DateFin', '', 1, 'ajouter la date fin ', '', ''));
   $formulaireContrat->ajouterComposantTab();
 
   $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('le type de contrat : '));
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('contrat', 'contrat', '',  1, 'le contrat', '', ''));
-  $formulaireContrat->ajouterComposantTab();
+	$formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('Acontrat', 'Acontrat', '',  1, 'le contrat', '', ''));
+	$formulaireContrat->ajouterComposantTab();
   $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('le nombre d heure : '));
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('heureNb', 'heureNb', '', 1, 'le nombre heure', '', ''));
+  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('AheureNb', 'AheureNb', '', 1, 'le nombre heure', '', ''));
   $formulaireContrat->ajouterComposantTab();
   $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('le nom de l interesser  : '));
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('nom', 'nom', '', 1, '', 'le nom', '', ''));
+  $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerInputTexte('Anom', 'Anom', '', 1, 'le nom', '', '', ''));
   $formulaireContrat->ajouterComposantTab();
-  $formulaireContrat->ajouterComposantLigne($formulaireContrat-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
-  $formulaireContrat->ajouterComposantTab();
+	$formulaireContrat->ajouterComposantLigne($formulaireContrat-> creerInputSubmit('submitConnexContrat', 'submitConnexContrat', 'Valider'));
+	$formulaireContrat->ajouterComposantTab();
 
-  $formulaireContrat->creerFormulaire();
+	$formulaireContrat->creerFormulaire();
+    $options =[];
+    foreach ($tabContrat as $key) {
+      array_push($options, $key['idContrat']);
+    }
 
 
 
@@ -105,28 +115,9 @@ if($user->getIdFonct()==3){
     $formulaireSuppContrat->creerFormulaire();
 
 
-  $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletinModif', 'fBulletinModif');
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('ajouter un bulletin'));
-  $formulaireBulletin->ajouterComposantTab();
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('Mois :'));
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Mois', 'Mois', '', 1, 'Entrez le mois', '', ''));
-  $formulaireBulletin->ajouterComposantTab();
-
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le bulletin en PDF : '));
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('pdf', 'pdf', '',  1, 'hop ajoute je pdf', '', ''));
-  $formulaireBulletin->ajouterComposantTab();
-
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le nom de l interesser  : '));
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('nom', 'nom', '',  1, 'le nom', '', ''));
-  $formulaireBulletin->ajouterComposantTab();
-  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
-  $formulaireBulletin->ajouterComposantTab();
-
-  $formulaireBulletin->creerFormulaire();
-
   $options =[];
-  foreach ($tabContrat as $key) {
-    array_push($options, $key['idContrat']);
+  foreach ($tabBulletin as $key) {
+    array_push($options, $key['idbulletin']);
   }
 
   $formulaireSuppBulletin = new Formulaire('post', '', 'fSBulletinModif', 'fSBulletinModif');
@@ -142,11 +133,40 @@ if($user->getIdFonct()==3){
 
 }
 else{
-  echo $user->getidUser();
-    $tabContrat=$uneConnex->contratUser($user->getidUser());
+
+    $tabContrat=$lesContrat->contratUser($user->getidUser());
 
 }
+//ajout contrat
+if(isset($_POST['Acontrat'])){
+  if(isset($_POST['submitConnexContrat'])){
+    $unUtilisateur = new UtilisateurDAO();
 
 
+    foreach ($unUtilisateur->UtilisateurRecupID($_POST['Anom']) as $key => $value) {
+      $idUser = $value;
+    }
+
+    $idNewContrat = count($tabContrat) + 1;
+
+    $lesContrat->ajoutContrat($idNewContrat,$_POST['ADateDeb'],$_POST['DateFin'],$_POST['Acontrat'],$_POST['AheureNb'],$idUser);
+  }
+}
+//ajout bulletin
+if(isset($_POST['BMois'])){
+
+  if(isset($_POST['submitConnexBulletin'])){
+    $unUtilisateur = new UtilisateurDAO();
+
+    $idNewBuletin = count($tabBulletin) + 1;
+    foreach ($lesContrat->RecupIDContrat($_POST['Bnom']) as $key => $value){
+      $idUserBulletin = $value;
+    }
+
+    $lesBulletinDAO->ajoutBulletin($idNewBuletin,$_POST['BMois'],$_POST['Bannee'],$_POST['Bpdf'] , $idUserBulletin);
+
+  }
+  echo "il faut indiquer le nom de famille.";
+}
 
 require_once 'vue/vueContrat.php' ;

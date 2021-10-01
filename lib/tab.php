@@ -45,15 +45,17 @@ function tab($array,$enTete){
 function menuDeroulant($tab){
 //nouvelle objet connex
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
-$EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat");
+$leBulletin = new BulletinDAO();
+$leContrat = new ContratDAO();
+$EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Modification");
 
   foreach($tab as $ligne){
-    $tabNomContrat= $uneConnex->nomContrat($ligne['idContrat']);
+    $tabNomContrat= $leContrat->nomContrat($ligne['idContrat']);
     foreach ($tabNomContrat as $key){
       $nom = $key['nom'];
       $prenom = $key['prenom'];
     }
-    $tabBulletin= $uneConnex->bulletin($ligne['idContrat']);
+    $tabBulletin= $leBulletin->bulletin($ligne['idContrat']);
     echo'<div class="accordion" id="accordionExample">';
   	  echo'<div class="accordion-item">';
   	   echo '<h2 class="accordion-header" id="'.$ligne['idContrat'].'">';
