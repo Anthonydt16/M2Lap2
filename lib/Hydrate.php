@@ -4,7 +4,7 @@ trait Hydrate{
     {
         foreach ($donnees as $key => $value)
         {
-            echo "$key $value \n";
+            //echo "$key $value \n";
             $method = 'set'.ucfirst($key);
             if (method_exists($this, $method))
             {
