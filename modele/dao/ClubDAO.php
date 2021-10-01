@@ -27,6 +27,40 @@ class ClubDAO extends PDO{
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
   }
+
+  public function ajoutClub($idClub,$nomClub,$adresseClub, $idLigue, $idCommune){
+      $requete = DBConnex::getInstance()->prepare("INSERT INTO `ligue` (`idClub`, `nomClub`, `adresseClub`, `idLigue`, `idCommune`) VALUES
+      (:idClub,:nomClub,:adresseClub,:idLigue,:idCommune)");
+      $requete->bindParam(":idClub",$idClub);
+      $requete->bindParam(":nomClub",$nomClub);
+      $requete->bindParam(":adresseClub",$adresseClub);
+      $requete->bindParam(":idLigue",$idLigue);
+      $requete->bindParam(":idCommune",$idCommune);
+      $requete->execute();
+
+  }
+
+
+  public function updateClub($idClub,$nomClub,$adresseClub, $idLigue, $idCommune){
+  $requete = DBConnex::getInstance()->prepare("UPDATE club SET idClub=:idClub , nomClub=:nomClub , adresseClub=:adresseClub , idLigue=:idLigue , idCommune=:idCommune");
+  $requete->bindParam(":idClub",$idClub);
+  $requete->bindParam(":nomClub",$nomClub);
+  $requete->bindParam(":adresseClub",$adresseClub);
+  $requete->bindParam(":idLigue",$idLigue);
+  $requete->bindParam(":idCommune",$idCommune);
+  $requete->execute();
+
+  }
+
+  public function suppClub($nomClub){
+
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM `club` WHERE `nomClub` = :nomClub");
+      $requete->bindParam(":nomClub",$nomClub);
+      $requete->execute();
+  }
+
+
+
 }
 
 ?>
