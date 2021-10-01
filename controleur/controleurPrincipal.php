@@ -75,6 +75,7 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("contrat", "Contrat"));
 
 	}
 	//menu intervenant
