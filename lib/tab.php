@@ -44,9 +44,11 @@ function tab($array,$enTete){
 
 function menuDeroulant($tab){
 //nouvelle objet connex
+//compteur pour idBulletin
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
 $leBulletin = new BulletinDAO();
 $leContrat = new ContratDAO();
+$compteur = 0;
 $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Modification");
 
   foreach($tab as $ligne){
@@ -56,10 +58,10 @@ $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Mo
       $prenom = $key['prenom'];
     }
     $tabBulletin= $leBulletin->bulletin($ligne['idContrat']);
-    for($i = 0; $i<count($tabBulletin); $i++){
-
-      array_Push($tabBulletin[$i], '<button id="boutonModifBulletin" type="button" onclick="click();" class="btn btn-secondary btn-lg btn-block">modifier</button>');
-
+  echo  'nb tab'.count($tabBulletin);
+    for($i =0; $i<count($tabBulletin); $i++){
+      $compteur = $compteur+1;
+      array_Push($tabBulletin[$i], '<button id="boutonModifBulletin" type="button" onclick="OnClick('.$compteur.');" class="btn btn-secondary btn-lg btn-block">modifier</button>');
     }
     echo'<div class="accordion" id="accordionExample">';
   	  echo'<div class="accordion-item">';

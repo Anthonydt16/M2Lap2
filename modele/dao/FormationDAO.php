@@ -74,4 +74,8 @@ public function getmesformations(){
   $donneeMesFormations=$requeteMesFormations->fetchAll(PDO::FETCH_ASSOC);
   return $donneeMesFormations;
 }
+
+public function select(){
+               echo "The select function is called";
+             }
 }

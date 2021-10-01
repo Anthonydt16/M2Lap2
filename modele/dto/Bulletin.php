@@ -7,6 +7,9 @@ class Bulletin{
   private $annee;
   private $bulletinPDF;
   private $idContrat;
+  public function __construct(){
+
+  }
 
 public function getIdbulletin(){
   return $this->idbulletin;

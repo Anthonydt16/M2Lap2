@@ -25,13 +25,6 @@
 			}
 
 			else{
-				?>
-				<script type="text/javascript">
-				function afficher() {
-    			alert("PLOP");
-				}
-				</script>
-				<?php
 				//fonction qui s'incrémente quand on entre dans la condition d'affichage pour ne pas afficher le message d'erreur même si on y entre
 				$testCondition=0;
 				foreach ($tabFormation as $key){
@@ -43,7 +36,9 @@
 					echo '<p class=texteFormation>'.'Fermeture inscriptions : '.$key['dateClotureInscriptions'].'</p>';
 					echo '<p class=texteFormation>'.'Début Formation : '.$key['DateDebutFormation'].'</p>';
 					echo '<p class=texteFormation>'.'Effectif Max : '.$key['EffectifMax'].'</p>';
-					echo '<a class="btnFormation" role="button" value="envoyer" onclick="afficher();>S'."'".'inscrire'.'</a>';
+					echo '<input class="btnFormation" type="submit" name="select" value="S'."'".'inscrire'.'" onclick="select()" />';
+					//echo '<a class="btnFormation1" role="button" value="envoyer">S'."'".'inscrire'.'</a
+					//echo '<a class="btnFormation" role="button" value="envoyer">S'."'".'inscrire'.'</a>';
 					echo '</div>';
 					$testCondition++;
 				}

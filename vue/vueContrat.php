@@ -5,6 +5,7 @@
 	<main>
 
 	<?php
+	$test = "wesh";
 	echo count($tabBulletin);
 	for($i = 0; $i<count($tabBulletin); $i++){
 
@@ -115,8 +116,14 @@ document.getElementById("boutonRetour")
 
 
 			function OnClick(i){
+<<<<<<< HEAD
 				document.write(i);
 				var myvalue =<?php echo'teste'; ?>;
+=======
+				console.log(i);
+
+				var myvalue ="<?php echo $test; ?>";
+>>>>>>> 8c89d0cdfa80e917ddac726da790e384e403f71a
 				document.getElementById('DateFinM').setAttribute('value', myvalue);
 			}
 
