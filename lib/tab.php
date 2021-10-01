@@ -56,6 +56,11 @@ $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Mo
       $prenom = $key['prenom'];
     }
     $tabBulletin= $leBulletin->bulletin($ligne['idContrat']);
+    for($i = 0; $i<count($tabBulletin); $i++){
+
+      array_Push($tabBulletin[$i], '<button id="boutonModifBulletin" type="button" onclick="click();" class="btn btn-secondary btn-lg btn-block">modifier</button>');
+
+    }
     echo'<div class="accordion" id="accordionExample">';
   	  echo'<div class="accordion-item">';
   	   echo '<h2 class="accordion-header" id="'.$ligne['idContrat'].'">';

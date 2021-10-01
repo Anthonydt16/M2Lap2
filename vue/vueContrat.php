@@ -5,7 +5,13 @@
 	<main>
 
 	<?php
+	echo count($tabBulletin);
+	for($i = 0; $i<count($tabBulletin); $i++){
 
+		array_Push($tabBulletin[$i], '<button id="boutonModifSuppBulletin" type="button" class="btn btn-primary btn-lg btn-block">modifier ou supprimer les bulletins</button>');
+
+	}
+	var_dump($tabBulletin);
 	menuDeroulant($tabContrat);
 	if($user->getIdFonct()==3)
 	{
@@ -35,7 +41,7 @@
 
 			<?php
 			if($user->getIdFonct()==3){
-				$formulaireContrat->afficherFormulaire();
+				$formulaireContratModif->afficherFormulaire();
 				$formulaireSuppContrat->afficherFormulaire();
 
 			?>
@@ -48,7 +54,7 @@
 			<?php
 
 			if($user->getIdFonct()==3){
-				$formulaireBulletin->afficherFormulaire();
+				$formulaireBulletinModif->afficherFormulaire();
 
 				$formulaireSuppBulletin->afficherFormulaire();
 
@@ -108,9 +114,10 @@ document.getElementById("boutonRetour")
 			}, false);
 
 
-			function OnClick(){
-				var myvalue = "bonjour";
-				document.getElementById('field1').setAttribute('value', myvalue);
+			function OnClick(i){
+				document.write(i);
+				var myvalue =<?php echo'teste'; ?>;
+				document.getElementById('DateFinM').setAttribute('value', myvalue);
 			}
 
 

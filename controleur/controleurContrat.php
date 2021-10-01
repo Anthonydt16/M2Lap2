@@ -43,7 +43,7 @@ else{
 
   $tabBulletin= $lesBulletinDAO->bulletinFull();
 }
-//formulaire
+//formulaire ajout
   $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
 	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('ajouter un bulletin'));
   $formulaireBulletin->ajouterComposantTab();
@@ -65,6 +65,29 @@ else{
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin-> creerInputSubmit('submitConnexBulletin', 'submitConnexBulletin', 'Valider'));
   $formulaireBulletin->ajouterComposantTab();
   $formulaireBulletin->creerFormulaire();
+
+//modification bulletin
+  $formulaireBulletinModif = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('ajouter un bulletin'));
+  $formulaireBulletinModif->ajouterComposantTab();
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('Mois :'));
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('BMois', 'BMois', '', 1, 'Entrez le mois', '', ''));
+	$formulaireBulletinModif->ajouterComposantTab();
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('année :'));
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bannee', 'Bannee', '', 1, 'Entrez l année ' , '', ''));
+  $formulaireBulletinModif->ajouterComposantTab();
+
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le bulletin en PDF : '));
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bpdf', 'Bpdf', '',  1, 'hop ajoute je pdf', '', ''));
+	$formulaireBulletinModif->ajouterComposantTab();
+
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le nom de l interesser  : '));
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bnom', 'Bnom', '',  1, 'le nom', '', ''));
+	$formulaireBulletinModif->ajouterComposantTab();
+
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif-> creerInputSubmit('submitConnexBulletin', 'submitConnexBulletin', 'Valider'));
+  $formulaireBulletinModif->ajouterComposantTab();
+  $formulaireBulletinModif->creerFormulaire();
 
   $formulaireContrat = new Formulaire('post', 'index.php', 'fContrat', 'fContrat');
 
@@ -92,6 +115,35 @@ else{
 	$formulaireContrat->ajouterComposantTab();
 
 	$formulaireContrat->creerFormulaire();
+
+
+
+  $formulaireContratModif = new Formulaire('post', 'index.php', 'fContratM', 'fContratM');
+
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Ajouter un Contrat'));
+  $formulaireContratModif->ajouterComposantTab();
+
+	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Date debut :'));
+	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('ADateDebM', 'ADateDebM', '', 1, 'ajouter la date', '', ''));
+	$formulaireContratModif->ajouterComposantTab();
+
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Date Fin :'));
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('DateFinM', 'DateFinM', '', 1, 'ajouter la date fin ', '', ''));
+  $formulaireContratModif->ajouterComposantTab();
+
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le type de contrat : '));
+	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AcontratM', 'AcontratM', '',  1, 'le contrat', '', ''));
+	$formulaireContratModif->ajouterComposantTab();
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le nombre d heure : '));
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AheureNbM', 'AheureNbM', '', 1, 'le nombre heure', '', ''));
+  $formulaireContratModif->ajouterComposantTab();
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le nom de l interesser  : '));
+  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AnomM', 'AnomM', '', 1, 'le nom', '', '', ''));
+  $formulaireContratModif->ajouterComposantTab();
+	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif-> creerInputSubmit('submitConnexContrat', 'submitConnexContrat', 'Valider'));
+	$formulaireContratModif->ajouterComposantTab();
+
+	$formulaireContratModif->creerFormulaire();
     $options =[];
     foreach ($tabContrat as $key) {
       array_push($options, $key['idContrat']);

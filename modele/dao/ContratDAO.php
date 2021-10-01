@@ -74,7 +74,18 @@ class ContratDAO extends PDO{
       return $donnee;
   }
 
+  public function UpdateContrat($idContrat,$dateDebut,$dateFin, $typeContrat, $nbheure, $iduser){
+      $requete = DBConnex::getInstance()->prepare("UPDATE `contrat` SET
+      `idContrat` = :idContrat, `dateDebut` = :dateDebut, `dateFin`=:dateFin, `typeContrat`=:typeContrat, `nbHeures`:=nbHeure, `idUser`=:idUser");
+      $requete->bindParam(":idContrat",$idContrat);
+      $requete->bindParam(":dateDebut",$dateDebut);
+      $requete->bindParam(":dateFin",$dateFin);
+      $requete->bindParam(":typeContrat",$typeContrat);
+      $requete->bindParam(":nbHeure",$nbheure);
+      $requete->bindParam(":idUser",$iduser);
+      $requete->execute();
 
+  }
 
 
 }
