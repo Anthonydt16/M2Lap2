@@ -28,30 +28,30 @@ class LigueDAO extends PDO{
       return $donnee;
   }
 
-  public function ajoutLigue($idLigue,$nomLigue,$site, $description){
-      $requete = DBConnex::getInstance()->prepare("INSERT INTO `ligue` (`idLigue`, `nomLigue`, `site`, `description`) VALUES
-      (:idLigue,:nomLigue,:site,:description)");
+  public function ajoutLigue($idLigue,$nomLigue,$site, $descriptif){
+      $requete = DBConnex::getInstance()->prepare("INSERT INTO ligue (idLigue, nomLigue, site, descriptif) VALUES
+      (:idLigue,:nomLigue,:site,:descriptif)");
       $requete->bindParam(":idLigue",$idLigue);
       $requete->bindParam(":nomLigue",$nomLigue);
       $requete->bindParam(":site",$site);
-      $requete->bindParam(":description",$description);
+      $requete->bindParam(":descriptif",$descriptif);
       $requete->execute();
 
   }
 
-  public function updateLigue($idLigue,$nomLigue,$site, $description){
-  $requete = DBConnex::getInstance()->prepare("UPDATE `ligue` SET idLigue=:idLigue , nomLigue=:nomLigue , site=:site , description=:description");
+  public function updateLigue($idLigue,$nomLigue,$site, $descriptif){
+  $requete = DBConnex::getInstance()->prepare("UPDATE ligue WHERE idLigue = :idLigue SET nomLigue=:nomLigue , site=:site , descriptif=:descriptif");
   $requete->bindParam(":idLigue",$idLigue);
   $requete->bindParam(":nomLigue",$nomLigue);
   $requete->bindParam(":site",$site);
-  $requete->bindParam(":description",$description);
+  $requete->bindParam(":descriptif",$descriptif);
   $requete->execute();
 
   }
 
   public function suppLigue($nomLigue){
 
-      $requete = DBConnex::getInstance()->prepare("DELETE FROM `ligue` WHERE `nomLigue` = :nomLigue");
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM ligue WHERE nomLigue = :nomLigue");
       $requete->bindParam(":nomLigue",$nomLigue);
       $requete->execute();
   }
