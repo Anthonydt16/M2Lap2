@@ -5,15 +5,17 @@ class Formulaire{
 	private $nom;
 	private $style;
 	private $formulaireToPrint;
+	private $encrypt;
 
 	private $ligneComposants = array();
 	private $tabComposants = array();
 
-	public function __construct($uneMethode, $uneAction , $unNom,$unStyle ){
+	public function __construct($uneMethode, $uneAction , $unNom,$unStyle,$penctype){
 		$this->method = $uneMethode;
 		$this->action =$uneAction;
 		$this->nom = $unNom;
 		$this->style = $unStyle;
+		$this->encrypt = $penctype;
 	}
 
 	public function concactComposants($unComposant , $autreComposant ){
@@ -94,6 +96,15 @@ class Formulaire{
 		$composant .= "value = '" . $uneValue . "'/> ";
 		return $composant;
 	}
+	public function creerUploadFilder($Type, $unId, $name,$accept,$required){
+		$composant = "<input type='".$Type."' ";
+		$composant .= "id='".$unId."' name='".$name."'";
+		$composant .="accept='".$accept."' />";
+
+
+		return $composant;
+	}
+
 
 	public function creerInputImage($unNom, $unId, $uneSource){
 		$composant = "<input type = 'image' name = '" . $unNom . "' id = '" . $unId . "' ";
@@ -106,7 +117,10 @@ class Formulaire{
 		$this->formulaireToPrint = "<form method = '" .  $this->method . "' ";
 		$this->formulaireToPrint .= "action = '" .  $this->action . "' ";
 		$this->formulaireToPrint .= "name = '" .  $this->nom . "' ";
-		$this->formulaireToPrint .= "class = '" .  $this->style . "' >";
+		$this->formulaireToPrint .= "class = '" .  $this->style . "'";
+		$this->formulaireToPrint .= "enctype = '" .  $this->encrypt . "' >";
+
+
 
 
 		foreach ($this->tabComposants as $uneLigneComposants){

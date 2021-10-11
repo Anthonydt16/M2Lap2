@@ -5,18 +5,19 @@
 	<main>
 
 	<?php
-	$test = "wesh";
-	echo count($tabBulletin);
+
 	for($i = 0; $i<count($tabBulletin); $i++){
 
 		array_Push($tabBulletin[$i], '<button id="boutonModifSuppBulletin" type="button" class="btn btn-primary btn-lg btn-block">modifier ou supprimer les bulletins</button>');
 
 	}
-	var_dump($tabBulletin);
+
 	menuDeroulant($tabContrat);
 	if($user->getIdFonct()==3)
 	{
+		$i = 0;
 ?>
+
 	<button id="boutonForm" type="button" class="btn btn-primary btn-lg btn-block">ajouter un contrat ou un bulletin de salaire</button>
 	<button id="boutonModifSuppContrat" type="button" class="btn btn-primary btn-lg btn-block">modifier ou supprimer les contrats </button>
 	<button id="boutonModifSuppBulletin" type="button" class="btn btn-primary btn-lg btn-block">modifier ou supprimer les bulletins</button>
@@ -114,17 +115,8 @@ document.getElementById("boutonRetour")
 			document.getElementById("invisibleModifBulletin").hidden = true;
 			}, false);
 
-
-			function OnClick(i){
-				console.log(i);
-				
-				var myvalue ="<?php echo $test; ?>";
-				document.getElementById('DateFinM').setAttribute('value', myvalue);
-			}
-
-
-
 </script>
+
 
 
 

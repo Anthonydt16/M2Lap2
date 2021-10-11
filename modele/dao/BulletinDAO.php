@@ -64,7 +64,7 @@ class BulletinDAO extends PDO{
 
   public function updateBulletin($idbulletin,$mois,$annee, $bulletinPDF, $idContrat){
 // chanmps de la requete `idbulletin``mois``annee``bulletinPDF``idContrat`
-      $requete = DBConnex::getInstance()->prepare("UPDATE bulletin SET idbulletin=:idbulletin , mois=:mois , annee=:annee , bulletinPDF=:bulletinPDF , idContrat=:idContrat");
+      $requete = DBConnex::getInstance()->prepare("UPDATE bulletin SET mois=:mois , annee=:annee , bulletinPDF=:bulletinPDF ,idContrat=:idContrat where idbulletin=:idbulletin");
       $requete->bindParam(":idbulletin",$idbulletin);
       $requete->bindParam(":mois",$mois);
       $requete->bindParam(":annee",$annee);
@@ -75,7 +75,22 @@ class BulletinDAO extends PDO{
   }
 
 
+  public function unBulletin($idbulletin){
 
-}
+      $requete = DBConnex::getInstance()->prepare("SELECT * FROM bulletin where idbulletin = :idbulletin");
+      $requete->bindParam(":idbulletin",$idbulletin);
+      $requete->execute();
+      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      return $donnee;
+  }
+  public function VerifSiNomExistBulletin($nom){
+
+      $requete = DBConnex::getInstance()->prepare("SELECT DISTINCT(U.nom) from utilisateur AS U, contrat AS C, bulletin AS B where C.idUser = U.idUser and B.idContrat = C.idContrat and U.nom =:nom");
+      $requete->bindParam(":nom",$nom);
+      $requete->execute();
+      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      return $donnee;
+  }
+  }
 
 ?>

@@ -27,16 +27,20 @@ function tab($array,$enTete){
 
       echo "<tr>";
 
+            foreach ($value as $cell) {
+              if($cell == $value['bulletinPDF']){
+                echo '<td><a class="btn btn-secondary" href="pdf/'.$value['bulletinPDF'].'" role="button">'.$value['bulletinPDF'].'</a></td>';
+              }
+              else{
+              echo "<td>".$cell."</td>";
+            }
+          }
 
 
-      foreach($value as $cell){
-
-          echo "<td>".$cell."</td>";
-
-
-      }
 
       echo "</tr>";
+
+
     }
     echo '</tbody>';
     echo "</table>";
@@ -45,6 +49,7 @@ function tab($array,$enTete){
 function menuDeroulant($tab){
 //nouvelle objet connex
 //compteur pour idBulletin
+$j = 0;
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
 $leBulletin = new BulletinDAO();
 $leContrat = new ContratDAO();
@@ -52,16 +57,18 @@ $compteur = 0;
 $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Modification");
 
   foreach($tab as $ligne){
+    $j++;
     $tabNomContrat= $leContrat->nomContrat($ligne['idContrat']);
     foreach ($tabNomContrat as $key){
       $nom = $key['nom'];
       $prenom = $key['prenom'];
     }
+    // permet d'ajouter le bouton au tab tabbulletin
     $tabBulletin= $leBulletin->bulletin($ligne['idContrat']);
-  echo  'nb tab'.count($tabBulletin);
     for($i =0; $i<count($tabBulletin); $i++){
       $compteur = $compteur+1;
-      array_Push($tabBulletin[$i], '<button id="boutonModifBulletin" type="button" onclick="OnClick('.$compteur.');" class="btn btn-secondary btn-lg btn-block">modifier</button>');
+
+      array_Push($tabBulletin[$i], '<a class="btn btn-secondary" href="index.php?m2lMPModifieB='.$compteur.'" role="button">Modifier le bulletin</a>');
     }
     echo'<div class="accordion" id="accordionExample">';
   	  echo'<div class="accordion-item">';
@@ -72,6 +79,7 @@ $EnTete = array("Numero bulletin", "mois", "année", "lien PDF", "idContrat","Mo
   	  echo  '</h2>';
   	    echo'<div id="collapse'.$ligne['idContrat'].'" class="accordion-collapse collapse show" aria-labelledby="'.$ligne['idContrat'].'" data-bs-parent="#accordionExample">';
   	    echo  '<div class="accordion-body">';
+        echo '<a class="btn btn-secondary" href="index.php?m2lMPModifieC='.$j.'" role="button">Modifier le contrat</a>';
 
 
   	         echo tab($tabBulletin,$EnTete);

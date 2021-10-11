@@ -6,10 +6,13 @@ require_once 'modele/dto/Utilisateur.php';
 
 //nouvelle objet connex
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
-
+if(isset($_GET['SelectInter'])){
+	$_SESSION['SelectInter'] = $_GET['SelectInter'];
+}
 if(isset($_GET['m2lMP'])){
 	$_SESSION['m2lMP']= $_GET['m2lMP'];
 }
+
 else
 {
 	if(!isset($_SESSION['m2lMP'])){
@@ -109,6 +112,7 @@ if( !empty($_SESSION['identification'])){
 	if($_SESSION['type'] == "3" ){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("contrat", "Contrat"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("intervenant", "Intervenant"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("InformationPersonnel", "InformationPersonnel"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));

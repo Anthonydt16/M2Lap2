@@ -56,7 +56,7 @@ class UtilisateurDAO extends PDO{
       $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur` where login = :login ");
       $requete->bindParam(":login",$login);
       $requete->execute();
-      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
 
     }
@@ -67,4 +67,19 @@ class UtilisateurDAO extends PDO{
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
+
+    public function lesUtilisateur(){
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur`");
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+
+      }
+// faire la disociation des requete entre ligue/ fonction /club
+      public function UtilisateurListFonctIdLigue(){
+          $requete = DBConnex::getInstance()->prepare("SELECT f.idFonct , l.idLigue, c.idClub  FROM `ligue` as l, utilisateur as u, fonction as f , club as c where c.idClub = u.idClub and f.idFonct = u.idFonct and l.idLigue = u.idUser");
+          $requete->execute();
+          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+          return $donnee;
+      }
 }
