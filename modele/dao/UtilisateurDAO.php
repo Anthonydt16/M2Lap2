@@ -67,6 +67,13 @@ class UtilisateurDAO extends PDO{
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
+    public function Utilisateurmdp($idUser){
+        $requete = DBConnex::getInstance()->prepare("SELECT mdp FROM `utilisateur` where idUser = :idUser ");
+        $requete->bindParam(":idUser",$idUser);
+        $requete->execute();
+        $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
 
     public function lesUtilisateur(){
         $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur`");
@@ -82,4 +89,40 @@ class UtilisateurDAO extends PDO{
           $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
           return $donnee;
       }
+      public function recupIdFonct(){
+          $requete = DBConnex::getInstance()->prepare("SELECT idFonct FROM `fonction`");
+          $requete->execute();
+          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+          return $donnee;
+      }
+      public function recupIdLigue(){
+          $requete = DBConnex::getInstance()->prepare("SELECT idLigue FROM `ligue`");
+          $requete->execute();
+          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+          return $donnee;
+      }
+      public function recupIdClub(){
+          $requete = DBConnex::getInstance()->prepare("SELECT idClub FROM `club`");
+          $requete->execute();
+          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+          return $donnee;
+      }
+
+      public function updateIntervenant(){
+          $requete = DBConnex::getInstance()->prepare("UPDATE utilisateur SET `nom` = :nom, `prenom` = :prenom, `login`= :login,  `mdp` = :mdp, `statut` = :statut, `typeUser` = :typeUser, `idFonct` = :idFonct, `idLigue` = :idLigue, `idClub` = :idClub WHERE idUser = :idUser");
+          $requete->execute();
+          // :nom,
+          // :prenom,
+          // :login,
+          // :mdp,
+          // :statut,
+          // :typeUser,
+          // :idFonct,
+          // :idLigue,
+          // :idClub
+          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+          return $donnee;
+      }
+
+
 }

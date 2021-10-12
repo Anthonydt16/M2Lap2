@@ -30,17 +30,17 @@ if(isset($_POST["login"])){
 		//recup des login et MDP
 
 		$login= $uneConnex->login($maConnex,$_POST["login"]);
-		$mdp = $uneConnex->password($maConnex,$_POST["mdp"]);
+		$mdp = $uneConnex->password($maConnex,md5($_POST["mdp"]));
 
 		$tabUtilisateur = $uneConnex->Utilisateur($login);
 
 		//teste si le mdp et le login correspond
-		if($mdp == $_POST["mdp"] && $login == $_POST["login"]){
+		if($mdp == md5($_POST["mdp"]) && $login == $_POST["login"]){
 
 			$_SESSION['identification'] = $_POST["login"];
 
-			$_SESSION['type']=$uneConnex->type($maConnex,$_SESSION['identification'],$_POST["mdp"]);
-			$_SESSION['status']=$uneConnex->status($maConnex,$_SESSION['identification'],$_POST["mdp"]);
+			$_SESSION['type']=$uneConnex->type($maConnex,$_SESSION['identification'],md5($_POST["mdp"]));
+			$_SESSION['status']=$uneConnex->status($maConnex,$_SESSION['identification'],md5($_POST["mdp"]));
 			//instanciation de la classe
 
 			$unUtilisateur= new Utilisateur();
@@ -110,6 +110,7 @@ if( !empty($_SESSION['identification'])){
 	}
 	//menu responsable DHR
 	if($_SESSION['type'] == "3" ){
+
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("contrat", "Contrat"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("intervenant", "Intervenant"));

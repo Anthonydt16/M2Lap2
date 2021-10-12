@@ -1,6 +1,6 @@
 <?php
-
 $LUtilisateur = new utilisateurDAO();
+
 
 $tabLesUtilisateur = $LUtilisateur->lesUtilisateur();
 $optionUser = [];
@@ -48,33 +48,53 @@ if(isset($_SESSION['SelectInter'])){
       $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerInputTexte('loginI', 'loginI', $UnUtilisateur->getLogin() , 1 , "" , "") );
       $formulaireModificationInter->ajouterComposantTab();
 
+
       $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerLabel('le Satut  :'));
       $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerInputTexte('SatutI', 'SatutI', $UnUtilisateur->getStatut() , 1 , "" , "") );
       $formulaireModificationInter->ajouterComposantTab();
 
 
-
+        //Creation du tab
         $optionsTypeUser =[];
-
+        //on push dans le tab la valeur de base pour l'affichage
+        array_Push($optionsTypeUser, $UnUtilisateur->getTypeUser());
         foreach ($LUtilisateur->Utilisateur($UnUtilisateur->getLogin()) as $key) {
-          array_push($optionsTypeUser, $key['typeUser']);
+          //la condition pour eviter les doublon
+          if($UnUtilisateur->getTypeUser() != $key['typeUser']){
+              array_push($optionsTypeUser, $key['typeUser']);
+          }
+
         }
 // faire la disociation des requete entre ligue/ fonction /club
         $optionsidFonct =[];
-        foreach ($LUtilisateur->UtilisateurListFonctIdLigue() as $key => $value) {
-          array_push($optionsidFonct, $value['idFonct']);
+        array_Push($optionsidFonct, $UnUtilisateur->getIdFonct());
+        foreach ($LUtilisateur->recupIdFonct() as $key => $value) {
+
+          if($UnUtilisateur->getIdFonct() != $value['idFonct']){
+
+            array_push($optionsidFonct, $value['idFonct']);
+          }
+
         }
 
         $optionsidLigue =[];
-        foreach ($LUtilisateur->UtilisateurListFonctIdLigue()  as $key => $value) {
-          array_push($optionsidLigue, $value['idLigue']);
+        array_Push($optionsidLigue, $UnUtilisateur->getIdLigue());
+
+        foreach ($LUtilisateur->recupIdLigue() as $key => $value) {
+          if($UnUtilisateur->getIdLigue() != $value['idLigue']){
+            array_push($optionsidLigue, $value['idLigue']);
+          }
+
         }
 
         $optionIdClub =[];
-      echo var_dump($LUtilisateur->UtilisateurListFonctIdLigue());
-        foreach ($LUtilisateur->UtilisateurListFonctIdLigue()  as $key => $value) {
-          var_dump($value);
-          array_push($optionIdClub, $value['idClub']);
+        array_push($optionIdClub, $UnUtilisateur->getIdClub());
+        foreach ($LUtilisateur->recupIdClub()  as $key => $value) {
+
+          if($UnUtilisateur->getIdClub() != $value['idClub']){
+            array_push($optionIdClub, $value['idClub']);
+          }
+
         }
 
 
