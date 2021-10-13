@@ -281,7 +281,6 @@ if(isset($_POST['submitConnexBulletin'])){
   }
   else{
     foreach ($lesContratDAO->verifSiLeNomExiste($_POST['Bnom']) as $key => $value) {
-      echo $_POST['Bnom']." = ".$value;
 
         if($_POST['Bnom'] == $value){
           $unUtilisateur = new UtilisateurDAO();

@@ -108,21 +108,55 @@ class UtilisateurDAO extends PDO{
           return $donnee;
       }
 
-      public function updateIntervenant(){
-          $requete = DBConnex::getInstance()->prepare("UPDATE utilisateur SET `nom` = :nom, `prenom` = :prenom, `login`= :login,  `mdp` = :mdp, `statut` = :statut, `typeUser` = :typeUser, `idFonct` = :idFonct, `idLigue` = :idLigue, `idClub` = :idClub WHERE idUser = :idUser");
+      public function updateIntervenant($idUser,$nom,$prenom,$login,$statut,$typeUser,$idFonct,$idLigue,$idClub){
+          $requete = DBConnex::getInstance()->prepare("UPDATE utilisateur SET `nom` = :nom, `prenom` = :prenom, `login`= :login, `statut` = :statut, `typeUser` = :typeUser, `idFonct` = :idFonct, `idLigue` = :idLigue, `idClub` = :idClub WHERE `utilisateur`.`idUser`= :idUser");
+          $requete->bindParam(":idUser",$idUser);
+          $requete->bindParam(":nom",$nom);
+          $requete->bindParam(":prenom",$prenom);
+          $requete->bindParam(":login",$login);
+          $requete->bindParam(":statut",$statut);
+          $requete->bindParam(":typeUser",$typeUser);
+          $requete->bindParam(":idFonct",$idFonct);
+          $requete->bindParam(":idLigue",$idLigue);
+          $requete->bindParam(":idClub",$idClub);
           $requete->execute();
-          // :nom,
-          // :prenom,
-          // :login,
-          // :mdp,
-          // :statut,
-          // :typeUser,
-          // :idFonct,
-          // :idLigue,
-          // :idClub
-          $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
-          return $donnee;
       }
+
+            public function updateIntervenantNull($idUser,$nom,$prenom,$login,$statut,$typeUser,$idFonct){
+                $requete = DBConnex::getInstance()->prepare("UPDATE utilisateur SET `nom` = :nom, `prenom` = :prenom, `login`= :login, `statut` = :statut, `typeUser` = :typeUser, `idFonct` = :idFonct WHERE `utilisateur`.`idUser`= :idUser");
+                $requete->bindParam(":idUser",$idUser);
+                $requete->bindParam(":nom",$nom);
+                $requete->bindParam(":prenom",$prenom);
+                $requete->bindParam(":login",$login);
+                $requete->bindParam(":statut",$statut);
+                $requete->bindParam(":typeUser",$typeUser);
+                $requete->bindParam(":idFonct",$idFonct);
+                $requete->execute();
+            }
+            public function deleteinter($idUser){
+                $requete = DBConnex::getInstance()->prepare("DELETE FROM utilisateur WHERE `utilisateur`.`idUser`= :idUser");
+                $requete->bindParam(":idUser",$idUser);
+                $requete->execute();
+            }
+
+            public function ajoutIntervenant($idUser,$mdp,$nom,$prenom,$login,$statut,$typeUser,$idFonct,$idLigue,$idClub){
+                $requete = DBConnex::getInstance()->prepare("INSERT into utilisateur values(:idUser,:nom, :prenom, :login,:mdp, :statut, :typeUser, :idFonct,:idLigue, :idClub)");
+                $requete->bindParam(":idUser",$idUser);
+                $requete->bindParam(":mdp",$mdp);
+                $requete->bindParam(":nom",$nom);
+                $requete->bindParam(":prenom",$prenom);
+                $requete->bindParam(":login",$login);
+                $requete->bindParam(":statut",$statut);
+                $requete->bindParam(":typeUser",$typeUser);
+                $requete->bindParam(":idFonct",$idFonct);
+                $requete->bindParam(":idLigue",$idLigue);
+                $requete->bindParam(":idClub",$idClub);
+
+                $requete->execute();
+            }
+
+
+
 
 
 }

@@ -11,9 +11,11 @@ foreach ($tabLesUtilisateur as $key => $unTabUtilisateur) {
   $Utilisateur->Hydrate($unTabUtilisateur);
 
   array_Push($LesUtilisateur, $Utilisateur);
+  $lastIdUser= $Utilisateur->getIdUser();
 }
 
 foreach ($LesUtilisateur as $key => $UnUtilisateur) {
+  //garde en memoire idUSer
 
     array_Push($optionUser, $UnUtilisateur->getIdUser());
 }
@@ -33,7 +35,12 @@ $formulaireSelectIntervenant->creerFormulaire();
 //verifie si le session existe bien
 if(isset($_SESSION['SelectInter'])){
   foreach ($LesUtilisateur as $key => $UnUtilisateur) {
+
+
     if($UnUtilisateur->getIdUser() == $_SESSION['SelectInter'] ){
+      $idUser= $UnUtilisateur->getIdUser();
+      //memoriser le nom
+      $nom= $UnUtilisateur->getNom();
       $formulaireModificationInter = new Formulaire('post', '', 'ModificationInter', 'ModificationInter','');
 
       $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerLabel('Nom  :'));
@@ -49,8 +56,8 @@ if(isset($_SESSION['SelectInter'])){
       $formulaireModificationInter->ajouterComposantTab();
 
 
-      $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerLabel('le Satut  :'));
-      $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerInputTexte('SatutI', 'SatutI', $UnUtilisateur->getStatut() , 1 , "" , "") );
+      $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerLabel('le Statut  :'));
+      $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter->creerInputTexte('StatutI', 'StatutI', $UnUtilisateur->getStatut() , 1 , "" , "") );
       $formulaireModificationInter->ajouterComposantTab();
 
 
@@ -65,7 +72,6 @@ if(isset($_SESSION['SelectInter'])){
           }
 
         }
-// faire la disociation des requete entre ligue/ fonction /club
         $optionsidFonct =[];
         array_Push($optionsidFonct, $UnUtilisateur->getIdFonct());
         foreach ($LUtilisateur->recupIdFonct() as $key => $value) {
@@ -117,10 +123,122 @@ if(isset($_SESSION['SelectInter'])){
 
       $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter-> creerInputSubmit('submitValidModif', 'submitValidModif', 'Valider'));
       $formulaireModificationInter->ajouterComposantTab();
+      $formulaireModificationInter->ajouterComposantLigne($formulaireModificationInter-> creerInputSubmit('submitValidSupp', 'submitValidSupp', 'Supprimer'));
+      $formulaireModificationInter->ajouterComposantTab();
 
       $formulaireModificationInter->creerFormulaire();
     }
+    $formulaireAjoutInter = new Formulaire('post', '', 'AjoutInter', 'AjoutInter','');
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('Nom  :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerInputTexte('nomA', 'nomA', "" , 1 , "" , "") );
+    $formulaireAjoutInter->ajouterComposantTab();
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('prenom  :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerInputTexte('prenomA', 'prenomA', "" , 1 , "" , "") );
+    $formulaireAjoutInter->ajouterComposantTab();
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('login  :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerInputTexte('loginA', 'loginA', "" , 1 , "" , "") );
+    $formulaireAjoutInter->ajouterComposantTab();
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('Mot de Passe :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerInputMdp('mdpA', 'mdpA',  1, 'Entrez votre mot de passe', ''));
+    $formulaireAjoutInter->ajouterComposantTab();
+
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('le Statut  :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerInputTexte('StatutA', 'StatutA', "" , 1 , "" , "") );
+    $formulaireAjoutInter->ajouterComposantTab();
+
+
+      //Creation du tab
+      $optionsTypeUserA =[];
+
+      foreach ($LUtilisateur->Utilisateur($UnUtilisateur->getLogin()) as $key) {
+
+            array_push($optionsTypeUserA, $key['typeUser']);
+
+      }
+
+      $optionsidFonctA =[];
+      foreach ($LUtilisateur->recupIdFonct() as $key => $value) {
+          array_push($optionsidFonctA, $value['idFonct']);
+      }
+      $optionsidLigueA =[];
+
+
+      foreach ($LUtilisateur->recupIdLigue() as $key => $value) {
+          array_push($optionsidLigueA, $value['idLigue']);
+      }
+      array_push($optionsidLigueA,"");
+      $optionIdClubA =[];
+      foreach ($LUtilisateur->recupIdClub()  as $key => $value) {
+
+
+          array_push($optionIdClubA, $value['idClub']);
+
+
+      }
+      array_push($optionIdClubA,"");
+
+
+
+
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('type User :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerSelect('typeUserA', 'typeUserSelectA', 'selectionner un type Contrat', $optionsTypeUserA));
+    $formulaireAjoutInter->ajouterComposantTab();
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('id de la fonction'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerSelect('idFonctA', 'idFonctSelectA', 'selectionner un id Fonct', $optionsidFonctA));
+    $formulaireAjoutInter->ajouterComposantTab();
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('l id ligue :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerSelect('idLigueA', 'idLigueSelectA', 'selectionner un id Ligue', $optionsidLigueA));
+    $formulaireAjoutInter->ajouterComposantTab();
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('l id Club :'));
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerSelect('idClubA', 'idClubSelectA', 'selectionner un id Club', $optionIdClubA));
+    $formulaireAjoutInter->ajouterComposantTab();
+
+    $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter-> creerInputSubmit('submitValidAjout', 'submitValidAjout', 'Ajouter'));
+    $formulaireAjoutInter->ajouterComposantTab();
+
+    $formulaireAjoutInter->creerFormulaire();
   }
+
+    if(isset($_POST['submitValidModif'])){
+      if($_POST['idLigue'] == null && $_POST['idClub'] == null){
+        $LUtilisateur->updateIntervenantNull($idUser,$_POST['nomI'],$_POST['prenomI'],$_POST['loginI'],$_POST['StatutI'],$_POST['typeUser'],$_POST['idFonct'],$_POST['idLigue'],$_POST['idClub']);
+
+        $tabLesUtilisateur = $LUtilisateur->lesUtilisateur();
+      }
+      echo $idUser.$_POST['nomI'].$_POST['prenomI'].$_POST['loginI'].$_POST['StatutI'].$_POST['typeUser'].$_POST['idFonct'].$_POST['idLigue'].$_POST['idClub'];
+      $LUtilisateur->updateIntervenant($idUser,$_POST['nomI'],$_POST['prenomI'],$_POST['loginI'],$_POST['StatutI'],$_POST['typeUser'],$_POST['idFonct'],$_POST['idLigue'],$_POST['idClub']);
+
+
+    }
+    if(isset($_POST['submitValidSupp'])){
+        $unContrat = new ContratDAO();
+
+         if (null == $unContrat->verifSiLeNomExiste($nom)) {
+           $LUtilisateur->deleteinter($idUser);
+               echo '<script>window.alert("suppression terminer");</script>';
+
+         }
+         else {
+               echo '<script>window.alert("il possede un contrat d abord supp c est contrat");</script>';
+         }
+    }
+
+    if(isset($_POST['submitValidAjout'])){
+      if($_POST['idLigueA'] == null && $_POST['idClubA'] == null){
+              $LUtilisateur->ajoutIntervenant($lastIdUser+1,md5($_POST['mdpA']),$_POST['nomA'],$_POST['prenomA'],$_POST['loginA'],$_POST['StatutA'],$_POST['typeUserA'],$_POST['idFonctA'],"NULL","NULL");
+
+        $tabLesUtilisateur = $LUtilisateur->lesUtilisateur();
+      }
+      $LUtilisateur->ajoutIntervenant($lastIdUser+1,md5($_POST['mdpA']),$_POST['nomA'],$_POST['prenomA'],$_POST['loginA'],$_POST['StatutA'],$_POST['typeUserA'],$_POST['idFonctA'],$_POST['idLigueA'],$_POST['idClubA']);
+
+
+    }
 
 }
 
