@@ -29,8 +29,8 @@ class LigueDAO extends PDO{
   }
 
   public function ajoutLigue($idLigue,$nomLigue,$site, $descriptif){
-      $requete = DBConnex::getInstance()->prepare("INSERT INTO ligue (idLigue, nomLigue, site, descriptif) VALUES
-      (:idLigue,:nomLigue,:site,:descriptif)");
+      $requete = DBConnex::getInstance()->prepare("INSERT INTO ligue (idLigue, nomLigue, site, descriptif)
+      VALUES (:idLigue,:nomLigue,:site,:descriptif)");
       $requete->bindParam(":idLigue",$idLigue);
       $requete->bindParam(":nomLigue",$nomLigue);
       $requete->bindParam(":site",$site);
@@ -40,7 +40,7 @@ class LigueDAO extends PDO{
   }
 
   public function updateLigue($idLigue,$nomLigue,$site, $descriptif){
-  $requete = DBConnex::getInstance()->prepare("UPDATE ligue WHERE idLigue = :idLigue SET nomLigue=:nomLigue , site=:site , descriptif=:descriptif");
+  $requete = DBConnex::getInstance()->prepare("UPDATE ligue SET nomLigue=:nomLigue , site=:site , descriptif=:descriptif WHERE idLigue = :idLigue");
   $requete->bindParam(":idLigue",$idLigue);
   $requete->bindParam(":nomLigue",$nomLigue);
   $requete->bindParam(":site",$site);

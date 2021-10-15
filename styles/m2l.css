@@ -431,3 +431,11 @@ style de la vue ligue
 	border-radius: 15px;
 	box-shadow: 3px 3px 3px #000;
 }
+
+.FormLigueClub{
+	float: left;
+	margin: 2%;
+	background-color: #grey;
+	border-radius: 15px;
+	box-shadow: 3px 3px 3px #000;
+}

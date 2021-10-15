@@ -28,10 +28,6 @@
 										echo '</ul>';
 									}
 								}
-								//Différent Bouton (Ajouter, Modifier, Supprimer)
-									echo'<button id="boutonAjouterLigue" type="submit" name="AjouterUneLigue"  value="AjouterUneLigue" class="btn btn-primary btn-lg btn-block">Ajouter un Club</button>';
-									echo'<button id="boutonModifLigue" type="submit" name="envoyer"  value="envoyer" class="btn btn-primary btn-lg btn-block">Modifier un Club</button>';
-									echo'<button id="boutonSupprLigue" type="submit" name="envoyer"  value="envoyer" class="btn btn-primary btn-lg btn-block">Supprimer un Club</button>';
 
 
 				echo '</div>';
