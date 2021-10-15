@@ -27,4 +27,32 @@ class LigueDAO extends PDO{
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
   }
+
+  public function ajoutLigue($idLigue,$nomLigue,$site, $descriptif){
+      $requete = DBConnex::getInstance()->prepare("INSERT INTO ligue (idLigue, nomLigue, site, descriptif)
+      VALUES (:idLigue,:nomLigue,:site,:descriptif)");
+      $requete->bindParam(":idLigue",$idLigue);
+      $requete->bindParam(":nomLigue",$nomLigue);
+      $requete->bindParam(":site",$site);
+      $requete->bindParam(":descriptif",$descriptif);
+      $requete->execute();
+
+  }
+
+  public function updateLigue($idLigue,$nomLigue,$site, $descriptif){
+  $requete = DBConnex::getInstance()->prepare("UPDATE ligue SET nomLigue=:nomLigue , site=:site , descriptif=:descriptif WHERE idLigue = :idLigue");
+  $requete->bindParam(":idLigue",$idLigue);
+  $requete->bindParam(":nomLigue",$nomLigue);
+  $requete->bindParam(":site",$site);
+  $requete->bindParam(":descriptif",$descriptif);
+  $requete->execute();
+
+  }
+
+  public function suppLigue($nomLigue){
+
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM ligue WHERE nomLigue = :nomLigue");
+      $requete->bindParam(":nomLigue",$nomLigue);
+      $requete->execute();
+  }
 }

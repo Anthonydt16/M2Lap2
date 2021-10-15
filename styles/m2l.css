@@ -442,9 +442,23 @@ Vue formation du point de vue du gestionnaire
 style de la vue ligue
 */
 .Ligue{
-	float: left;
+	float:left;
 	margin: 2%;
 	background-color: #33acf1;
 	border-radius: 15px;
 	box-shadow: 3px 3px 3px #000;
+	padding: 1%;
+}
+
+.FormLigueClub{
+	display: inline-block;
+	margin: 2%;
+	background-color: #black;
+	border-radius: 15px;
+	box-shadow: 3px 3px 3px #000;
+	padding: 1%;
+}
+
+.ligne{
+	margin-top: 2%;
 }
