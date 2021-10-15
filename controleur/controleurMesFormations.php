@@ -1,7 +1,10 @@
 <?php
-require_once 'modele/dao/FormationDAO.php';
+require_once 'modele/dao/MesFormationsDAO.php';
 
-$mesFormations = new FormationDAO();
+$idUser = $_SESSION['idUtilisateur']['idUser'];
+
+$mesFormations = new MesFormationDAO();
 $tabMesFormations = $mesFormations->getmesformations();
+
 
 require_once 'vue/vueMesFormations.php' ;

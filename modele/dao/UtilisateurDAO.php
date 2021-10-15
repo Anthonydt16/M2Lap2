@@ -67,4 +67,5 @@ class UtilisateurDAO extends PDO{
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
+    
 }

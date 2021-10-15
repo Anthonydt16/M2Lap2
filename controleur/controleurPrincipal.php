@@ -30,6 +30,7 @@ if(isset($_POST["login"])){
 		$mdp = $uneConnex->password($maConnex,$_POST["mdp"]);
 
 		$tabUtilisateur = $uneConnex->Utilisateur($login);
+		$idUtilisateur= $uneConnex->UtilisateurRecupIDByLogin($login);
 
 		//teste si le mdp et le login correspond
 		if($mdp == $_POST["mdp"] && $login == $_POST["login"]){
@@ -39,6 +40,8 @@ if(isset($_POST["login"])){
 			$_SESSION['type']=$uneConnex->type($maConnex,$_SESSION['identification'],$_POST["mdp"]);
 			$_SESSION['status']=$uneConnex->status($maConnex,$_SESSION['identification'],$_POST["mdp"]);
 			//instanciation de la classe
+
+			$_SESSION['idUtilisateur']=$idUtilisateur;
 
 			$unUtilisateur= new Utilisateur();
 			$unUtilisateur->hydrate($tabUtilisateur);

@@ -22,11 +22,12 @@ class FormationDAO extends PDO{
 /*
 Récupere les formations à venir en vérifiant que la personne ne soit pas déjà inscrite
 */
-public function getformation($login){
+public function getformation(/*$login*/){
       $requete = DBConnex::getInstance()->prepare("
       SELECT formation.idForma, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
       FROM formation
-      WHERE dateClotureInscriptions > NOW() AND formation.idForma NOT IN (
+      WHERE dateClotureInscriptions > NOW()
+      AND formation.idForma NOT IN (
         SELECT formation.idForma
         FROM inscrire, formation, utilisateur
         WHERE login = :login
@@ -42,7 +43,7 @@ public function getformation($login){
       return $donnee;
   }
 /*
-Récupère les formations donc la date de début de formation n'est pas déjà passée, et calcule le nombre de place restantes.
+Récupère les formations dont la date de début de formation n'est pas déjà passée, et calcule le nombre de place restantes.
 */
 public function getformationresponsable(){
     $requete2 = DBConnex::getInstance()->prepare("
@@ -56,26 +57,40 @@ public function getformationresponsable(){
     $donnee2 = $requete2->fetchAll(PDO::FETCH_ASSOC);
     return $donnee2;
   }
+
 /*
 Récupère les formations auxquelles l'utilisateur connecté est inscrit pour lui afficher ses futures formations.
 */
+/* DANS LE FICHIER MESFORMATIONSDAO
 public function getmesformations(){
-  $requeteMesFormations = DBConnex::getInstance()->prepare("
+  $requeteObtenirMesFormations = DBConnex::getInstance()->prepare("
   SELECT intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
-  FROM formation, inscrire
-  WHERE login = :login
-    AND EtatInscrit = 1
+  FROM formation, inscrire, utilisateur
+  WHERE idUser = :idUser
+    AND EtatInscrit = '1'
     AND DateDebutFormation > NOW()
     AND inscrire.idForma = formation.idForma
+    AND inscrire.idUser = utilisateur.idUser
   ORDER BY DateDebutFormation
   Limit 3
   ");
+  $requeteObtenirMesFormations->bindParam(":idUser", $idUser);
+  $requeteObtenirMesFormations->execute();
+  $donneeObtenirMesFormations=$requeteObtenirMesFormations->fetchAll(PDO::FETCH_ASSOC);
+  return $donneeObtenirMesFormations;
+}
+*/
+/*
+S'inscrit à la formation sélectionnée.
+*/
+public function demandeInscription($idForma, $idUser){
+  $requeteMesFormations = DBConnex::getInstance()->prepare("
+  INSERT INTO inscrire VALUES (:idForma, :idUser, '2', NOW())
+  ");
+  $requeteMesFormations->bindParam(":idForma", $idForma);
+  $requeteMesFormations->bindParam(":idUser", $idUser);
   $requeteMesFormations->execute();
   $donneeMesFormations=$requeteMesFormations->fetchAll(PDO::FETCH_ASSOC);
   return $donneeMesFormations;
 }
-
-public function select(){
-               echo "The select function is called";
-             }
 }

@@ -70,7 +70,13 @@ class DBConnex extends PDO{
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
-
+    public function UtilisateurRecupIDByLogin($login){
+        $requete = DBConnex::getInstance()->prepare("SELECT idUser FROM `utilisateur` where login = :login ");
+        $requete->bindParam(":login",$login);
+        $requete->execute();
+        $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
 
 
 

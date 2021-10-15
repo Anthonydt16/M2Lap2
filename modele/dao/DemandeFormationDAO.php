@@ -20,16 +20,13 @@ class DemandeFormationDAO extends PDO{
       }
   }
 
-public function getdemandeformation(/*$login*/){
+public function getinscriptions(){
       $requete = DBConnex::getInstance()->prepare("
-      SELECT ((EffectifMax)-(count(inscrire.idForma))) as PlacesRestantes, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation
-      FROM inscrire, formation
-      WHERE inscrire.idForma = formation.idForma
-        AND DateDebutFormation > NOW()
+      SELECT intitule, nom, prenom, statut, DateInscription
+      FROM inscrire, utilisateur, formation
+      WHERE EtatInscrit = '2' AND inscrire.idForma = formation.idForma AND inscrire.idUser = utilisateur.idUser
       GROUP BY formation.idForma
-      ORDER BY DateDebutFormation
       ");
-      $requete->bindParam(":login", $login);
       $requete->execute();
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;

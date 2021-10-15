@@ -348,20 +348,18 @@ style de la vue formations
 		 border-radius: 50px;
 }
 
-.center-div .btnFormation {
-	display: block;
+.btnFormation {
+	margin: 1%;
+	padding: 1%;
 	width: 150px;
 	line-height: 50px;
 	text-align: center;
-	vertical-align: middle;
 	text-decoration: none;
 	background-color: #1dcb32;
-	margin: 15px;
 	border-radius: 15px;
 	font-size: 20px;
 	box-shadow: 3px 3px 3px;
 	color: grey;
-	margin: 0 auto;
 }
 
 .divBtnForma{
@@ -383,11 +381,33 @@ style de la vue formations
 	text-align: center;
 }
 
+
 /*
 Vue formation du point de vue du gestionnaire
 */
 
-.divBtnForma .btnSuppForma{
+.selectBarre{
+	text-align: center;
+	margin-top: 2%;
+}
+
+.selectBarre .boutonForma{
+	width: 8%;
+	border-radius: 10px;
+	background-color: #1dcb32;
+	margin-left: 1%;
+}
+
+.selectBarre .ajouter{
+	float: left;
+	margin-left: 2%;
+	width: 8%;
+	border-radius: 10px;
+	background-color: #1dcb32;
+}
+
+
+/*.divBtnForma .btnSuppForma{
 	margin-top: 2%;
 	margin-right: 2%;
 	float: right;
@@ -410,11 +430,8 @@ Vue formation du point de vue du gestionnaire
 	font-size: 20px;
 	box-shadow: 3px 3px 3px;
 	color: grey;
-}
+}*/
 
-/*
-Vue ligues
-*/
 
 .MsgNoFormation{
 	text-align: center;
