@@ -29,8 +29,8 @@ class ClubDAO extends PDO{
   }
 
   public function ajoutClub($idClub,$nomClub,$adresseClub, $idLigue, $idCommune){
-      $requete = DBConnex::getInstance()->prepare("INSERT INTO `ligue` (`idClub`, `nomClub`, `adresseClub`, `idLigue`, `idCommune`) VALUES
-      (:idClub,:nomClub,:adresseClub,:idLigue,:idCommune)");
+      $requete = DBConnex::getInstance()->prepare("INSERT INTO club (idClub, nomClub, adresseClub, idLigue, idCommune)
+      VALUES (:idClub,:nomClub,:adresseClub,:idLigue,:idCommune)");
       $requete->bindParam(":idClub",$idClub);
       $requete->bindParam(":nomClub",$nomClub);
       $requete->bindParam(":adresseClub",$adresseClub);
@@ -42,7 +42,7 @@ class ClubDAO extends PDO{
 
 
   public function updateClub($idClub,$nomClub,$adresseClub, $idLigue, $idCommune){
-  $requete = DBConnex::getInstance()->prepare("UPDATE club SET idClub=:idClub , nomClub=:nomClub , adresseClub=:adresseClub , idLigue=:idLigue , idCommune=:idCommune");
+  $requete = DBConnex::getInstance()->prepare("UPDATE club SET nomClub=:nomClub , adresseClub=:adresseClub , idLigue=:idLigue , idCommune=:idCommune WHERE idClub = :idClub");
   $requete->bindParam(":idClub",$idClub);
   $requete->bindParam(":nomClub",$nomClub);
   $requete->bindParam(":adresseClub",$adresseClub);
@@ -54,7 +54,7 @@ class ClubDAO extends PDO{
 
   public function suppClub($nomClub){
 
-      $requete = DBConnex::getInstance()->prepare("DELETE FROM `club` WHERE `nomClub` = :nomClub");
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM club WHERE nomClub = :nomClub");
       $requete->bindParam(":nomClub",$nomClub);
       $requete->execute();
   }

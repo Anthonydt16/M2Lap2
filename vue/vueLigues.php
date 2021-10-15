@@ -33,26 +33,44 @@
 				echo '</div>';
 				}
 
-								//Formulaire ajouter
-								echo "<div id='AjoutLigue'>";
+								//Formulaire ajouter Ligue
+								echo "<div class='FormLigueClub'>";
 
 										echo'<form action="'. $_SERVER['PHP_SELF'] .'" method="post">';
 										$formulaireAjoutLigue->afficherFormulaire();
-										echo'<form>';
-								echo '</div>';
+										echo'</form>';
 
-								// Formulaire supprimer
-								echo "<div id='SupprLigue'>";
+										// Formulaire Modifier Ligue
+
+												$formulaireModifLigue->afficherFormulaire();
+
+
+								// Formulaire supprimer Ligue
 
 										$formulaireSuppLigue->afficherFormulaire();
-								echo '</div>';
+										echo "</div>";
 
-								// Formulaire Modifier
-								echo "<div id='ModifLigue'>";
 
-										$formulaireModifLigue->afficherFormulaire();
-								echo "</div>";
+								//Formulaire ajouter Club
+								echo "<div class='FormLigueClub'>";
+
+										echo'<form action="'. $_SERVER['PHP_SELF'] .'" method="post">';
+										$formulaireAjoutClub->afficherFormulaire();
+										echo'</form>';
+
+										// Formulaire Modifier Club
+
+												$formulaireModifClub->afficherFormulaire();
+
+
+
+								// Formulaire supprimer Club
+
+										$formulaireSuppClub->afficherFormulaire();
+										echo "</div>";
 			}
+
+
 			//afficher sans les Bouton (pour tout autre que la secrétaire)
 			else{
 				foreach ($tabLigue as $keyL){
@@ -90,7 +108,7 @@
 				}
 					}
 
-					//Fonction Ajout
+					//Fonction Ajout Ligue
 					if(isset($_POST['AjoutidLigue'])){
 
 						if(isset($_POST['submitAjoutLigue'])){
@@ -100,7 +118,7 @@
 						}
 					}
 
-					//Fonction supprimer A finir
+					//Fonction supprimer Ligue
 					if(isset($_POST['SupprLigue'])){
 
 						if(isset($_POST['submitSupprLigue'])){
@@ -110,7 +128,7 @@
 						}
 					}
 
-					//Fonction Modifier A Finir
+					//Fonction Modifier Ligue
 					if(isset($_POST['ModifidLigue'])){
 
 						if(isset($_POST['submitModifLigue'])){
@@ -119,6 +137,37 @@
 
 						}
 					}
+
+					//Fonction Ajout Club
+					if(isset($_POST['AjoutidClub'])){
+
+						if(isset($_POST['submitAjoutClub'])){
+
+							$unClub->ajoutClub($_POST['AjoutidClub'], $_POST['AjoutnomClub'], $_POST['AjoutadresseClub'], $_POST['AjoutidLigueClub'], $_POST['AjoutidCommune']);
+
+						}
+					}
+
+					//Fonction supprimer Club
+					if(isset($_POST['SupprClub'])){
+
+						if(isset($_POST['submitSupprClub'])){
+
+							$unClub->suppClub($_POST['SupprClub']);
+
+						}
+					}
+
+					//Fonction Modifier Club
+					if(isset($_POST['ModifieridClub'])){
+
+						if(isset($_POST['submitModifierClub'])){
+
+							$unClub->updateClub($_POST['ModifieridClub'], $_POST['ModifiernomClub'], $_POST['ModifieradresseClub'], $_POST['ModifieridLigueClub'], $_POST['ModifieridCommune']);
+
+						}
+					}
+
 
 ?>
 	</main>

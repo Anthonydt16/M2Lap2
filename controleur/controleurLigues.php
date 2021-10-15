@@ -33,7 +33,7 @@
 
   //Formulaire Supprimer Ligue
   $formulaireSuppLigue = new Formulaire('post', 'index.php', 'fSupprLigue', 'fSupprLigue');
-  $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerLabel('Supprimer une Ligue'));
+  $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerLabel('Supprimer une Ligue (Supprimer tous les clubs dedans)'));
   $formulaireSuppLigue->ajouterComposantTab();
   $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerLabel('Nom de la Ligue à supprimer :'));
   $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerInputTexte('SupprLigue', 'SupprLigue', '', 1, 'Entrez le nom de la ligue à supprimer', '', ''));
@@ -64,6 +64,70 @@
   $formulaireModifLigue->ajouterComposantTab();
 
   $formulaireModifLigue->creerFormulaire();
+
+  //Formulaire Ajouter Club
+  $formulaireAjoutClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub');
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('Ajouter un club'));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('id Club à ajouter:'));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputTexte('AjoutidClub', 'AjoutidClub', '', 1, 'Entrez l id du club', '', ''));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('Nom du Club :'));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputTexte('AjoutnomClub', 'AjoutnomClub', '', 1, 'Entrez le Nom du club ' , '', ''));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('Adresse du Club:'));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputTexte('AjoutadresseClub', 'AjoutadresseClub', '', 1, 'Entrez l adresse du club ' , '', ''));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('id de la ligue rataché:'));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputTexte('AjoutidLigueClub', 'AjoutidLigueClub', '', 1, 'Entrez un id de ligue ' , '', ''));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('id de la Commune:'));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputTexte('AjoutidCommune', 'AjoutidCommune', '', 1, 'Entrez l id de la commune ' , '', ''));
+  $formulaireAjoutClub->ajouterComposantTab();
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputSubmit('submitAjoutClub', 'submitAjoutClub', 'Valider'));
+  $formulaireAjoutClub->ajouterComposantTab();
+
+  $formulaireAjoutClub->creerFormulaire();
+
+
+  //Formulaire Modifier Club
+  $formulaireModifClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub');
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('Modifier un club'));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('id Club à Modifier:'));
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputTexte('ModifieridClub', 'ModifieridClub', '', 1, 'Entrez l id du club à modifier', '', ''));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('Nom du Club :'));
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputTexte('ModifiernomClub', 'ModifiernomClub', '', 1, 'Entrez le nouveau Nom du club ' , '', ''));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('Adresse du Club:'));
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputTexte('ModifieradresseClub', 'ModifieradresseClub', '', 1, 'Entrez la nouvelle adresse du club ' , '', ''));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('id de la ligue rataché:'));
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputTexte('ModifieridLigueClub', 'ModifieridLigueClub', '', 1, 'Entrez un id de ligue ' , '', ''));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('id de la Commune:'));
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputTexte('ModifieridCommune', 'ModifieridCommune', '', 1, 'Entrez l id de la commune ' , '', ''));
+  $formulaireModifClub->ajouterComposantTab();
+  $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerInputSubmit('submitModifierClub', 'submitModifierClub', 'Valider'));
+  $formulaireModifClub->ajouterComposantTab();
+
+  $formulaireModifClub->creerFormulaire();
+
+
+  //Formulaire Supprimer Club
+  $formulaireSuppClub = new Formulaire('post', 'index.php', 'fSupprClub', 'fSupprClub');
+  $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerLabel('Supprimer un Club'));
+  $formulaireSuppClub->ajouterComposantTab();
+  $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerLabel('Nom du Club à supprimer :'));
+  $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerInputTexte('SupprClub', 'SupprClub', '', 1, 'Entrez le nom du club à supprimer', '', ''));
+  $formulaireSuppClub->ajouterComposantTab();
+  $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerInputSubmit('submitSupprClub', 'submitSupprClub', 'Valider'));
+  $formulaireSuppClub->ajouterComposantTab();
+
+  $formulaireSuppClub->creerFormulaire();
 
 
 	require_once 'vue/vueLigues.php' ;
