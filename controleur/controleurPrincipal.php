@@ -92,8 +92,8 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "Mes Formation"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "MesFormations"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconnexion"));
 		}
 		elseif($_SESSION['status']=="salarie"){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("accueil", "Accueil"));
@@ -103,8 +103,8 @@ if( !empty($_SESSION['identification'])){
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 			$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "Mes Formation"));
-			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("mesFormations", "MesFormations"));
+			$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconnexion"));
 		}
 
 	}
@@ -116,7 +116,7 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("services", "Services"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconnexion"));
 
 
 	}
@@ -128,7 +128,7 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("demandeFormation", "Inscrits"));
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconexion"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconnexion"));
 	}
 
 

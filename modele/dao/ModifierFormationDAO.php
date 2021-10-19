@@ -21,25 +21,36 @@ class ModifierFormationDAO extends PDO{
   }
 
 
-  public function modifierFormation($idForma){
+  public function modifierFormation($idForma, $intitule, $descriptif, $duree, $ouvertureInscription, $fermetureInscription, $debutFormation, $effectifMax){
     $requeteModifierFormations = DBConnex::getInstance()->prepare("
-
+    UPDATE formation
+    SET intitule = :intitule, descriptif = :descriptif, duree = :duree, dateOuvertinscriptions = :ouvertureInscription, dateClotureInscriptions = :fermetureInscription, DateDebutFormation = :debutFormation, EffectifMax = :effectifMax
+    WHERE idForma = :idForma
     ");
     $requeteModifierFormations->bindParam(":idForma", $idForma);
+    $requeteModifierFormations->bindParam(":intitule", $intitule);
+    $requeteModifierFormations->bindParam(":descriptif", $descriptif);
+    $requeteModifierFormations->bindParam(":duree", $duree);
+    $requeteModifierFormations->bindParam(":ouvertureInscription", $ouvertureInscription);
+    $requeteModifierFormations->bindParam(":fermetureInscription", $fermetureInscription);
+    $requeteModifierFormations->bindParam(":debutFormation", $debutFormation);
+    $requeteModifierFormations->bindParam(":effectifMax", $effectifMax);
     $requeteModifierFormations->execute();
     $donneeModifierFormations=$requeteModifierFormations->fetchAll(PDO::FETCH_ASSOC);
     return $donneeModifierFormations;
   }
 
-  public function affichageFormationAModifier($idForma){
+  public function affichageFormationAModifier($idFormaModif){
     $requeteAffichage = DBConnex::getInstance()->prepare("
-    SELECT intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
+    SELECT idForma, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
     FROM formation
     WHERE idForma = :idForma
     ");
-    $requeteAffichage->bindParam(":idForma", $idForma);
+    $requeteAffichage->bindParam(":idForma", $idFormaModif);
     $requeteAffichage->execute();
     $donneeAffichage=$requeteAffichage->fetchAll(PDO::FETCH_ASSOC);
     return $donneeAffichage;
   }
+
+
 }

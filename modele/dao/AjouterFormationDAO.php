@@ -19,21 +19,31 @@ class AjouterFormationDAO extends PDO{
           die("Impossible de se connecter.") ;
       }
   }
-  public function ajouterformation(){
+  public function ajouterformation($lastIdForma, $intitule, $descriptif, $duree, $ouvertureInscription, $fermetureInscription, $debutFormation, $effectifMax){
     $requeteAjouterFormation = DBConnex::getInstance()->prepare("
-    INSERT INTO formation VALUES('','','','','','','')
+    INSERT INTO formation
+    VALUES(:lastIdForma, :intitule, :descriptif, :duree, :ouvertureInscription, :fermetureInscription, :debutFormation, :effectifMax)
     ");
-    $requeteAjouterFormation->query();
+    $requeteAjouterFormation->bindParam(':lastIdForma', $lastIdForma);
+    $requeteAjouterFormation->bindParam(':intitule', $intitule);
+    $requeteAjouterFormation->bindParam(':descriptif', $descriptif);
+    $requeteAjouterFormation->bindParam(':duree', $duree);
+    $requeteAjouterFormation->bindParam(':ouvertureInscription', $ouvertureInscription);
+    $requeteAjouterFormation->bindParam(':fermetureInscription', $fermetureInscription);
+    $requeteAjouterFormation->bindParam(':debutFormation', $debutFormation);
+    $requeteAjouterFormation->bindParam(':effectifMax', $effectifMax);
+    $requeteAjouterFormation->execute();
     $donneeAjouterFormation=$requeteAjouterFormation->fetchAll(PDO::FETCH_ASSOC);
     return $donneeAjouterFormation;
   }
 
   public function getlastid(){
     $requeteGetLastId = DBConnex::getInstance()->prepare("
-    SELECT idForma
+    SELECT count(idForma)+1 as newForma
     FROM formation
-    ORDER BY idForma DESC
-    LIMITE 1
-    ")
+    ");
+    $requeteGetLastId->execute();
+    $donneeGetLastId=$requeteGetLastId->fetchAll(PDO::FETCH_ASSOC);
+    return $donneeGetLastId;
   }
 }

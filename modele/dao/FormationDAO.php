@@ -22,12 +22,12 @@ class FormationDAO extends PDO{
 /*
 Récupere les formations à venir en vérifiant que la personne ne soit pas déjà inscrite
 */
-public function getformation(/*$login*/){
+public function getformation(){
       $requete = DBConnex::getInstance()->prepare("
-      SELECT formation.idForma, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
+      SELECT idForma, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
       FROM formation
       WHERE dateClotureInscriptions > NOW()
-      AND formation.idForma NOT IN (
+      AND idForma NOT IN (
         SELECT formation.idForma
         FROM inscrire, formation, utilisateur
         WHERE login = :login
@@ -47,7 +47,7 @@ Récupère les formations dont la date de début de formation n'est pas déjà p
 */
 public function getformationresponsable(){
     $requete2 = DBConnex::getInstance()->prepare("
-    SELECT ((EffectifMax)-(count(inscrire.idForma))) as PlacesRestantes, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation
+    SELECT formation.idForma, ((EffectifMax)-(count(inscrire.idForma))) as PlacesRestantes, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation
     FROM formation LEFT JOIN inscrire ON inscrire.idForma = formation.idForma
     WHERE DateDebutFormation > NOW()
     GROUP BY formation.idForma

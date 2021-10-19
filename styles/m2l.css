@@ -406,38 +406,50 @@ Vue formation du point de vue du gestionnaire
 	background-color: #1dcb32;
 }
 
-
-/*.divBtnForma .btnSuppForma{
-	margin-top: 2%;
-	margin-right: 2%;
-	float: right;
-	width: 30px;
-	height: 30px;
-}
-
-.btnFormationAjouter{
-	margin-top: 1%;
-	display: block;
-	width: 30%;
-	line-height: 35px;
-	text-align: center;
-	vertical-align: middle;
-	text-decoration: none;
-	background-color: #1dcb32;
+.formulaireModifAjout{
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 20px;
-	font-size: 20px;
-	box-shadow: 3px 3px 3px;
-	color: grey;
-}*/
+	margin-top: 2%;
+	width: 35%;
+	height: 85%;
+	background-color: #33acf1;
+	border-radius: 15px;
+	box-shadow: 3px 3px 3px #000;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 1%;
+}
 
+.formulaireModifAjout .inputFormulaire{
+	float: right;
+
+}
+
+.formulaireModifAjout .boutonFormaModifAjout{
+	align-items: center;
+	width: 30%;
+	border-radius: 10px;
+	background-color: #1dcb32;
+	margin-left: 1%;
+}
 
 .MsgNoFormation{
 	text-align: center;
 	font-size: 20px;
 	font-style: oblique;
 }
+
+.tableauInscrit{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+}
+
+.boutonInscrit{
+	padding: 1%;
+	margin: 1%;
+}
+
 /*
 style de la vue ligue
 */

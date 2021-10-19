@@ -22,9 +22,9 @@ class DemandeFormationDAO extends PDO{
 
 public function getinscriptions(){
       $requete = DBConnex::getInstance()->prepare("
-      SELECT intitule, nom, prenom, statut, DateInscription
+      SELECT formation.idForma, intitule, nom, prenom, statut, DateInscription, utilisateur.idUser
       FROM inscrire, utilisateur, formation
-      WHERE EtatInscrit = '2' AND inscrire.idForma = formation.idForma AND inscrire.idUser = utilisateur.idUser
+      WHERE EtatInscrit = '0' AND inscrire.idForma = formation.idForma AND inscrire.idUser = utilisateur.idUser
       GROUP BY formation.idForma
       ");
       $requete->execute();

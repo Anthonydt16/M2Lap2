@@ -19,15 +19,18 @@ class SupprimerFormationDAO extends PDO{
           die("Impossible de se connecter.") ;
       }
   }
-  public function supprimerFormation($idForma){
+  public function supprimerInscrireFormation($idForma){
     $requeteSupprimerInscrits = DBConnex::getInstance()->prepare("
     DELETE FROM inscrire
     WHERE idForma = :idForma
-    ")
+    ");
     $requeteSupprimerInscrits->bindParam(":idForma", $idForma);
     $requeteSupprimerInscrits->execute();
     $donneeSupprimerInscrits=$requeteSupprimerInscrits->fetchAll(PDO::FETCH_ASSOC);
+    return $donneeSupprimerInscrits;
+  }
 
+  public function supprimerFormation($idForma){
     $requeteSupprimerFormations = DBConnex::getInstance()->prepare("
     DELETE FROM formation
     WHERE idForma = :idForma
@@ -35,6 +38,6 @@ class SupprimerFormationDAO extends PDO{
     $requeteSupprimerFormations->bindParam(":idForma", $idForma);
     $requeteSupprimerFormations->execute();
     $donneeSupprimerFormations=$requeteSupprimerFormations->fetchAll(PDO::FETCH_ASSOC);
-    return $donneeSupprimerInscrits, $donneeSupprimerFormations;
+    return $donneeSupprimerFormations;
   }
 }
