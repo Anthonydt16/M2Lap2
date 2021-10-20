@@ -7,7 +7,7 @@
 			<?php
 			$user = unserialize($_SESSION['unUtilisateur']);
 			$FonctUser = $user->getIdFonct();
-			if ($FonctUser==4){
+			if ($FonctUser==4){//si connecté en tant que responsable
 				echo '<div>';
 				echo '<div class="selectBarre">';
 
@@ -35,7 +35,7 @@
 
 				echo '</div>';
 
-				foreach ($tabFormationResponsable as $key){
+				foreach ($tabFormationResponsable as $key){//affiche pour chaque formations les éléments souhaités
 					echo '<div class="divBtnForma">';
 					echo '<p class=texteFormation>'.$key['intitule'].'</p>';
 					echo '<p class=texteFormation>'.$key['descriptif'].'</p>';
@@ -48,25 +48,28 @@
 				}
 			}
 
-			else{
+			else{//si connecté en tant qu'utilisateur lambda
 				//fonction qui s'incrémente quand on entre dans la condition d'affichage pour ne pas afficher le message d'erreur même si on y entre
 				$testCondition=0;
 
 				echo '<div>';
 				echo '<div class="selectBarre">';
+
 				echo '<form action="index.php?m2lMP=inscription" method="POST">';
 				echo '<label for="form-select">Sélectionnez une formation :  </label>';
-				echo '<select name="forma" id="forma">';
-				echo '<option value="">----</option>';
+
+				echo '<select name="forma" id="forma">';//permet de choisir la formation à modifier ou supprimer
 				foreach ($tabFormation as $key){
 						echo '<option value="'.$key['idForma'].'">'.$key['intitule'].'</option>';
 				}
 				echo '</select>';
-				echo '<input type="submit" name="insert" value="S'."'".'inscrire'.'" onclick="demandeInscription()" />';
+
+				echo '<input class="boutonForma" type="submit" name="insert" value="S'."'".'inscrire'.'" onclick="demandeInscription()" />';
 				echo '</form>';
+
 				echo '</div>';
 
-				foreach ($tabFormation as $key){
+				foreach ($tabFormation as $key){//affiche pour chaque formations les éléments souhaités
 					echo '<div class="divBtnForma">';
 					echo '<p class=texteFormation>'.$key['intitule'].'</p>';
 					echo '<p class=texteFormation>'.$key['descriptif'].'</p>';

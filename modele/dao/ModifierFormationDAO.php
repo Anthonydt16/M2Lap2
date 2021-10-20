@@ -20,7 +20,9 @@ class ModifierFormationDAO extends PDO{
       }
   }
 
-
+  /*
+  *Permet de modifier la formation sélectionnée
+  */
   public function modifierFormation($idForma, $intitule, $descriptif, $duree, $ouvertureInscription, $fermetureInscription, $debutFormation, $effectifMax){
     $requeteModifierFormations = DBConnex::getInstance()->prepare("
     UPDATE formation
@@ -40,7 +42,7 @@ class ModifierFormationDAO extends PDO{
     return $donneeModifierFormations;
   }
 
-  public function affichageFormationAModifier($idFormaModif){
+  public function affichageFormationAModifier($idFormaModif){//permet l'affichage de la formation sélectionnée afin de la modifier
     $requeteAffichage = DBConnex::getInstance()->prepare("
     SELECT idForma, intitule, descriptif, duree, dateOuvertinscriptions, dateClotureInscriptions, DateDebutFormation, EffectifMax
     FROM formation

@@ -2,6 +2,9 @@
   require_once 'modele/dao/ModifierFormationDAO.php';
   require_once 'modele/dao/FormationDAO.php';
 
+  /*
+  *récupère toutes les variables entrées dans la modification pour les utiliser dans la requete sql
+  */
   $idFormaModif = $_POST['idForma'];
   $intitule = $_POST['intitule'];
   $descriptif = $_POST['descriptif'];
@@ -16,9 +19,13 @@
   $modifierFormaDAO -> modifierFormation($idFormaModif, $intitule, $descriptif, $duree, $ouvertureInscription, $fermetureInscription, $debutFormation, $effectifMax);
 
 
+  /*
+  *Permet de revenir sur la vue formation
+  */
+  $idUser = $_SESSION['idUtilisateur']['idUser'];//récupère l'id de l'utilisateur connecté
 
   $uneFormation = new FormationDAO();
-  $tabFormation = $uneFormation->getformation();
+  $tabFormation = $uneFormation->getformation($idUser);
 
   $uneFormationResponsable = new FormationDAO();
   $tabFormationResponsable = $uneFormationResponsable->getformationresponsable();

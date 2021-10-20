@@ -348,6 +348,9 @@ style de la vue formations
 		 border-radius: 50px;
 }
 
+/*
+*
+*/
 .btnFormation {
 	margin: 1%;
 	padding: 1%;
@@ -362,6 +365,9 @@ style de la vue formations
 	color: grey;
 }
 
+/*
+*permet de créer la zone bleue pour chacune des formations et de différencier chacune des formations visuellement
+*/
 .divBtnForma{
 		 float: left;
      margin: 3%;
@@ -376,21 +382,43 @@ style de la vue formations
 		 box-shadow: 3px 3px 3px #000;
 }
 
+/*
+*permet de placer correctement le texte de chaque formation dans sa zone bleue
+*/
 .center-div .texteFormation{
 	margin-top: 3%;
 	text-align: center;
 }
 
+/*
+*change la couleur du texte en fonction de l'état de l'inscription
+*/
+.texteFormationEnAttente{
+	margin-top: 3%;
+	text-align: center;
+	color: orange;
+}
+
+.texteFormationInscrit{
+	margin-top: 3%;
+	text-align: center;
+	color: green;
+}
 
 /*
 Vue formation du point de vue du gestionnaire
 */
-
+/*
+*place la barre de sélection de la formation dans la vue formation
+*/
 .selectBarre{
 	text-align: center;
 	margin-top: 2%;
 }
 
+/*
+*permet de changer les boutons modifier et supprimer reliés à la barre de sélection des formations que l'on souhaite modifier ou supprimer dans la vue formation
+*/
 .selectBarre .boutonForma{
 	width: 8%;
 	border-radius: 10px;
@@ -398,6 +426,9 @@ Vue formation du point de vue du gestionnaire
 	margin-left: 1%;
 }
 
+/*
+*permet de changer le bouton ajouter dans la vue formation
+*/
 .selectBarre .ajouter{
 	float: left;
 	margin-left: 2%;
@@ -406,6 +437,9 @@ Vue formation du point de vue du gestionnaire
 	background-color: #1dcb32;
 }
 
+/*
+*modifie l'affichage du formulaire de formation à modifier dans la vue modifier formation
+*/
 .formulaireModifAjout{
 	margin-left: auto;
 	margin-right: auto;
@@ -422,7 +456,6 @@ Vue formation du point de vue du gestionnaire
 
 .formulaireModifAjout .inputFormulaire{
 	float: right;
-
 }
 
 .formulaireModifAjout .boutonFormaModifAjout{
@@ -433,12 +466,18 @@ Vue formation du point de vue du gestionnaire
 	margin-left: 1%;
 }
 
+/*
+*permet de changer le style et la position du texte que l'on affiche en cas d'abscence de formation
+*/
 .MsgNoFormation{
 	text-align: center;
 	font-size: 20px;
 	font-style: oblique;
 }
 
+/*
+*permet de placer le tableau des inscrits dans la vue inscrits du responsable des formations
+*/
 .tableauInscrit{
 	margin-left: auto;
 	margin-right: auto;

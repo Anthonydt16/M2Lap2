@@ -6,8 +6,11 @@
     $formaIdDAO = new AjouterFormationDAO();
     $tabLastIdForma = $formaIdDAO -> getlastid();
 
-    $lastIdForma = $tabLastIdForma[0]['newForma'];
+    $lastIdForma = $tabLastIdForma[0]['newForma'];//permet d'obtenir sous forme de texte l'id de la nouvelle formation
 
+    /*
+    *permet de récupérer les données entrées dans le formulaire d'ajout afin de les utiliser dans la requete sql
+    */
     $intitule = $_POST['intitule'];
     $descriptif = $_POST['descriptif'];
     $duree = $_POST['duree'];

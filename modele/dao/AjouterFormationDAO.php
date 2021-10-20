@@ -19,6 +19,7 @@ class AjouterFormationDAO extends PDO{
           die("Impossible de se connecter.") ;
       }
   }
+  //permet au responsable d'ajouter une formation
   public function ajouterformation($lastIdForma, $intitule, $descriptif, $duree, $ouvertureInscription, $fermetureInscription, $debutFormation, $effectifMax){
     $requeteAjouterFormation = DBConnex::getInstance()->prepare("
     INSERT INTO formation
@@ -37,7 +38,7 @@ class AjouterFormationDAO extends PDO{
     return $donneeAjouterFormation;
   }
 
-  public function getlastid(){
+  public function getlastid(){//permet de récupérer le dernier id de formation en lui ajoutant 1 de façon à créer un nouvel id de formation
     $requeteGetLastId = DBConnex::getInstance()->prepare("
     SELECT count(idForma)+1 as newForma
     FROM formation

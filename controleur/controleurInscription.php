@@ -9,5 +9,8 @@
   $formaDAO -> demandeInscription($idForma, $idUser);
 
 
+
+  $uneFormation = new FormationDAO();
+  $tabFormation = $uneFormation->getformation($idUser);
  	require_once 'controleur/controleurFormation.php' ;
  ?>

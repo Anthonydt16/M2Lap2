@@ -19,7 +19,7 @@ class SupprimerFormationDAO extends PDO{
           die("Impossible de se connecter.") ;
       }
   }
-  public function supprimerInscrireFormation($idForma){
+  public function supprimerInscrireFormation($idForma){//supprime les formations avec l'id sélectionné dans la table 'inscrire' pour simuler le DELETE ON CASCADE
     $requeteSupprimerInscrits = DBConnex::getInstance()->prepare("
     DELETE FROM inscrire
     WHERE idForma = :idForma
@@ -30,7 +30,7 @@ class SupprimerFormationDAO extends PDO{
     return $donneeSupprimerInscrits;
   }
 
-  public function supprimerFormation($idForma){
+  public function supprimerFormation($idForma){//supprime la formation avec l'id sélectionné dans la table formation
     $requeteSupprimerFormations = DBConnex::getInstance()->prepare("
     DELETE FROM formation
     WHERE idForma = :idForma

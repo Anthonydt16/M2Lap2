@@ -9,9 +9,9 @@
 			echo '<div class="formulaireModifAjout">';
 
 			echo '<form action="index.php?m2lMP=validerModificationFormation" method="POST">';
-			foreach ($tabformaDAO as $key){
+			foreach ($tabformaDAO as $key){//créé un affichage avec des champs à remplir qui seront récupérés pour modifier une formation
 
-				echo '<p class="nomChampsModifierFormation">Numéro de la formation : <input class="inputFormulaire" type="text" id="idForma" name="idForma" value="'.$key['idForma'].'" disabled="disabled"/></p>';
+				echo '<input class="inputFormulaire" type="hidden" id="idForma" name="idForma" value="'.$key['idForma'].'"/>';
 
 				echo '<p class="nomChampsModifierFormation">Intitulé de la formation <input class="inputFormulaire" type="text" id="intitule" name="intitule" value="'.$key['intitule'].'"/></p>';
 
@@ -33,7 +33,7 @@
 			echo '<input class="boutonFormaModifAjout" type="submit" name="alter" value="Modifier" onclick="modifierFormation()"/>';//boutton valider la modification de la formation
 			echo '</form>';
 
-			echo '<form action="index.php?m2lMP=formation" method="POST">';
+			echo '<form action="index.php?m2lMP=formation" method="POST">';//retourne sur la vue formation après avoir appuyer sur le bouton
 			echo '<input class="boutonFormaModifAjout" type="submit" name="annuler" value="Annuler"/>';//boutton annuler la modification de la formation
 			echo '</form>';
 

@@ -19,13 +19,13 @@ class AccepterRefuserInscriptionDAO extends PDO{
           die("Impossible de se connecter.") ;
       }
   }
-  public function accepterinscription($idUser, $idForma){
+  public function accepterinscription($idUser, $idForma){//fonction qui accepte l'inscription si on click sur accepter
     $requeteAccepter = DBConnex::getInstance()->prepare("
     UPDATE inscrire
     SET EtatInscrit = '1'
     WHERE idUser = :idUser
     AND idForma = :idForma
-    ");
+    ");//1 étant l'état accepté, et 0 l'état en attente
     $requeteAccepter->bindParam(':idForma', $idForma);
     $requeteAccepter->bindParam(':idUser', $idUser);
     $requeteAccepter->execute();
@@ -33,7 +33,7 @@ class AccepterRefuserInscriptionDAO extends PDO{
     return $donneeAccepter;
   }
 
-  public function refuserinscription($idUser, $idForma){
+  public function refuserinscription($idUser, $idForma){//fonction qui supprime la demande d'inscription
     $requeteRefuser = DBConnex::getInstance()->prepare("
     DELETE FROM inscrire
     WHERE idUser = :idUser

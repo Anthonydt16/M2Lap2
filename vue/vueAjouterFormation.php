@@ -5,7 +5,9 @@
 	<main>
 		<div class = center-div>
 			<?php
-
+			/*
+			*permet d'afficher un formulaire dans lequel nous pouvons ajouter des informations à une nouvelle formation
+			*/
 			echo '<div class="formulaireModifAjout">';
 
 			echo '<form action="index.php?m2lMP=validerAjoutFormation" method="POST">';
