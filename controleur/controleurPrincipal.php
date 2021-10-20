@@ -127,7 +127,7 @@ if( !empty($_SESSION['identification'])){
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("locaux", "Locaux"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("ligues", "Ligues"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("formation", "Formation"));
-		$m2lMP->ajouterComposant($m2lMP->creerItemLien("demandeFormation", "Inscrits"));
+		$m2lMP->ajouterComposant($m2lMP->creerItemLien("demandeFormation", "Dde Inscription"));
 		$m2lMP->ajouterComposant($m2lMP->creerItemLien("deconnexion", "Déconnexion"));
 	}
 
