@@ -26,7 +26,7 @@ if(isset($_GET['m2lMPModifieC'])){
     $lesContratDAO= new ContratDAO();
     $unContrat= new Contrat();
     $tabunContrat = $lesContratDAO->contratFindId($idContrat);
-    
+
     $unContrat->hydrate($tabunContrat);
     $_SESSION['unContrat'] = serialize($unContrat);
 
@@ -66,7 +66,7 @@ if(isset($_SESSION['unUtilisateur'])){
 }
 else{
   //sinon contrat et bulletin perso
-
+  echo '<p> Vous n\'avez aucun contrat pour le moment</p>'; 
 }
 //formulaire ajout
   $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin','multipart/form-data');
