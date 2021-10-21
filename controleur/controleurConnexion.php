@@ -1,7 +1,7 @@
 <?php
 
 
-	$formulaireConnexion = new Formulaire('post', 'index.php', 'fConnexion', 'fConnexion');
+	$formulaireConnexion = new Formulaire('post', 'index.php', 'fConnexion', 'fConnexion','');
 
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabel('Identifiant :'));
 	$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputTexte('login', 'login', '', 1, 'Entrez votre identifiant', ''));

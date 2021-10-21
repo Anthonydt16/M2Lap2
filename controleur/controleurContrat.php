@@ -1,17 +1,45 @@
 <?php
-
 require_once 'lib/tab.php' ;
 $tabContrat = [];
 $tabBulletin = [];
+
 //DAObulletin
 $lesBulletinDAO = new BulletinDAO();
-$lesContrat = new ContratDAO();
+$lesContratDAO = new ContratDAO();
 
 //DAOcontrat
+if(isset($_GET['m2lMPModifieB'])){
+   $_SESSION['m2lMPModifieB']= $_GET['m2lMPModifieB'];
+   $idBulletin =$_SESSION['m2lMPModifieB'];
+
+    $unBulletin= new Bulletin();
+
+    $tabunbulletin = $lesBulletinDAO->unBulletin($idBulletin);
+    $unBulletin->hydrate($tabunbulletin);
+    $_SESSION['unBulletin'] = serialize($unBulletin);
+}
+
+if(isset($_GET['m2lMPModifieC'])){
+   $_SESSION['m2lMPModifieC']= $_GET['m2lMPModifieC'];
+   $idContrat =$_SESSION['m2lMPModifieC'];
+    //fais une classe DTO COntrat
+    $lesContratDAO= new ContratDAO();
+    $unContrat= new Contrat();
+    $tabunContrat = $lesContratDAO->contratFindId($idContrat);
+    var_dump($tabunContrat);
+    $unContrat->hydrate($tabunContrat);
+    $_SESSION['unContrat'] = serialize($unContrat);
+
+
+}
+
+
 $leContrat = new ContratDAO();
 if(isset($_SESSION['unUtilisateur'])){
   $user = unserialize($_SESSION['unUtilisateur']);
+  $tabContrat=$leContrat->contratUser($user->getidUser());
 
+  $tabBulletin= $lesBulletinDAO->bulletinFull();
 
 
   if(!empty($_POST['idContrat'])){
@@ -31,20 +59,17 @@ if(isset($_SESSION['unUtilisateur'])){
   if($user->getIdFonct()==3){
     //recuperation donnée contrat et bulletin rh
     $tabContrat=$leContrat->contrat();
-     $lesBulletinDAO->bulletinFull();
+     $tabBulletin=$lesBulletinDAO->bulletinFull();
 
 
   //$leContrat->hydrate($tabContrat);
 }
 else{
   //sinon contrzt et bulletin perso
-
-  $tabContrat=$leContrat->contratUser($user->getidUser());
-
-  $tabBulletin= $lesBulletinDAO->bulletinFull();
+  var_dump($tabBulletin);
 }
 //formulaire ajout
-  $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
+  $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin','multipart/form-data');
 	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('ajouter un bulletin'));
   $formulaireBulletin->ajouterComposantTab();
 	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('Mois :'));
@@ -54,9 +79,9 @@ else{
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bannee', 'Bannee', '', 1, 'Entrez l année ' , '', ''));
   $formulaireBulletin->ajouterComposantTab();
 
-	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le bulletin en PDF : '));
-	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bpdf', 'Bpdf', '',  1, 'hop ajoute je pdf', '', ''));
-	$formulaireBulletin->ajouterComposantTab();
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le bulletin en PDF : '));
+  $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerUploadFilder('file', 'Bpdf', 'Bpdf','',1));
+  $formulaireBulletin->ajouterComposantTab();
 
   $formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerLabel('le nom de l interesser  : '));
 	$formulaireBulletin->ajouterComposantLigne($formulaireBulletin->creerInputTexte('Bnom', 'Bnom', '',  1, 'le nom', '', ''));
@@ -67,29 +92,49 @@ else{
   $formulaireBulletin->creerFormulaire();
 
 //modification bulletin
-  $formulaireBulletinModif = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin');
-	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('ajouter un bulletin'));
+  $formulaireBulletinModif = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin','multipart/form-data');
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('modifier le bulletin'));
   $formulaireBulletinModif->ajouterComposantTab();
 	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('Mois :'));
-	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('BMois', 'BMois', '', 1, 'Entrez le mois', '', ''));
+	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('BMois', 'BMois', ' ', 1, 'Entrez le mois', '', ''));
 	$formulaireBulletinModif->ajouterComposantTab();
   $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('année :'));
-  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bannee', 'Bannee', '', 1, 'Entrez l année ' , '', ''));
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bannee', 'Bannee', ' ', 1, 'Entrez l année ' , '', ''));
   $formulaireBulletinModif->ajouterComposantTab();
 
-	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le bulletin en PDF : '));
-	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bpdf', 'Bpdf', '',  1, 'hop ajoute je pdf', '', ''));
-	$formulaireBulletinModif->ajouterComposantTab();
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le bulletin en PDF : '));
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerUploadFilder('file', 'Bpdf', 'Bpdf','',1));
+  $formulaireBulletinModif->ajouterComposantTab();
 
-  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le nom de l interesser  : '));
-	$formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bnom', 'Bnom', '',  1, 'le nom', '', ''));
-	$formulaireBulletinModif->ajouterComposantTab();
 
-  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif-> creerInputSubmit('submitConnexBulletin', 'submitConnexBulletin', 'Valider'));
+
+  $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif-> creerInputSubmit('submitConneMBulletinM', 'submitConnexBulletinM', 'Valider'));
   $formulaireBulletinModif->ajouterComposantTab();
   $formulaireBulletinModif->creerFormulaire();
 
-  $formulaireContrat = new Formulaire('post', 'index.php', 'fContrat', 'fContrat');
+      //le formulaire pour les modif
+  if(isset($_GET['m2lMPModifieB'])){
+    $formulaireBulletinModif = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin','multipart/form-data');
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('modifier le bulletin'));
+    $formulaireBulletinModif->ajouterComposantTab();
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('Mois :'));
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('BMois', 'BMois', $unBulletin->getMois() , 1, 'Entrez le mois', '', ''));
+    $formulaireBulletinModif->ajouterComposantTab();
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('année :'));
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerInputTexte('Bannee', 'Bannee',$unBulletin->getAnnee() , 1, 'Entrez l année ' , '', ''));
+    $formulaireBulletinModif->ajouterComposantTab();
+
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerLabel('le bulletin en PDF : '));
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif->creerUploadFilder('file', 'Bpdf', 'Bpdf','',1));
+    $formulaireBulletinModif->ajouterComposantTab();
+
+
+    $formulaireBulletinModif->ajouterComposantLigne($formulaireBulletinModif-> creerInputSubmit('submitConnexBulletinM', 'submitConnexBulletinM', 'Valider'));
+    $formulaireBulletinModif->ajouterComposantTab();
+    $formulaireBulletinModif->creerFormulaire();
+  }
+
+  $formulaireContrat = new Formulaire('post', 'index.php', 'fContrat', 'fContrat','');
 
   $formulaireContrat->ajouterComposantLigne($formulaireContrat->creerLabel('Ajouter un Contrat'));
   $formulaireContrat->ajouterComposantTab();
@@ -118,7 +163,7 @@ else{
 
 
 
-  $formulaireContratModif = new Formulaire('post', 'index.php', 'fContratM', 'fContratM');
+  $formulaireContratModif = new Formulaire('post', 'index.php', 'fContratM', 'fContratM','');
 
   $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Ajouter un Contrat'));
   $formulaireContratModif->ajouterComposantTab();
@@ -137,13 +182,37 @@ else{
   $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le nombre d heure : '));
   $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AheureNbM', 'AheureNbM', '', 1, 'le nombre heure', '', ''));
   $formulaireContratModif->ajouterComposantTab();
-  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le nom de l interesser  : '));
-  $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AnomM', 'AnomM', '', 1, 'le nom', '', '', ''));
-  $formulaireContratModif->ajouterComposantTab();
-	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif-> creerInputSubmit('submitConnexContrat', 'submitConnexContrat', 'Valider'));
+	$formulaireContratModif->ajouterComposantLigne($formulaireContratModif-> creerInputSubmit('submitConnexContratM', 'submitConnexContratM', 'Valider'));
 	$formulaireContratModif->ajouterComposantTab();
 
 	$formulaireContratModif->creerFormulaire();
+
+  //attribuer les valeur au form
+  if(isset($_GET['m2lMPModifieC'])){
+    $formulaireContratModif = new Formulaire('post', 'index.php', 'fContratM', 'fContratM','');
+
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Ajouter un Contrat'));
+    $formulaireContratModif->ajouterComposantTab();
+
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Date debut :'));
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('ADateDebM', 'ADateDebM', $unContrat->getDateDebut(), 1, 'ajouter la date', '', ''));
+    $formulaireContratModif->ajouterComposantTab();
+
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('Date Fin :'));
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('DateFinM', 'DateFinM',  $unContrat->getDateFin(), 1, 'ajouter la date fin ', '', ''));
+    $formulaireContratModif->ajouterComposantTab();
+
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le type de contrat : '));
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AcontratM', 'AcontratM',  $unContrat->getTypeContrat(),  1, 'le contrat', '', ''));
+    $formulaireContratModif->ajouterComposantTab();
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerLabel('le nombre d heure : '));
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif->creerInputTexte('AheureNbM', 'AheureNbM',  $unContrat->getNbHeures(), 1, 'le nombre heure', '', ''));
+    $formulaireContratModif->ajouterComposantTab();
+    $formulaireContratModif->ajouterComposantLigne($formulaireContratModif-> creerInputSubmit('submitConnexContratM', 'submitConnexContratM', 'Valider'));
+    $formulaireContratModif->ajouterComposantTab();
+
+    $formulaireContratModif->creerFormulaire();
+  }
     $options =[];
     foreach ($tabContrat as $key) {
       array_push($options, $key['idContrat']);
@@ -155,7 +224,7 @@ else{
 
 
 
-    $formulaireSuppContrat = new Formulaire('post', '', 'fSContratModif', 'fSContratModif');
+    $formulaireSuppContrat = new Formulaire('post', '', 'fSContratModif', 'fSContratModif','');
     $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat->creerLabel('selectionner le contrat a supprimer :'));
     $formulaireSuppContrat->ajouterComposantTab();
     $formulaireSuppContrat->ajouterComposantLigne($formulaireSuppContrat->creerLabel('contrat :'));
@@ -167,16 +236,16 @@ else{
     $formulaireSuppContrat->creerFormulaire();
 
 
-  $options =[];
+  $options1 =[];
   foreach ($tabBulletin as $key) {
-    array_push($options, $key['idbulletin']);
+    array_push($options1, $key['idbulletin']);
   }
 
-  $formulaireSuppBulletin = new Formulaire('post', '', 'fSBulletinModif', 'fSBulletinModif');
+  $formulaireSuppBulletin = new Formulaire('post', '', 'fSBulletinModif', 'fSBulletinModif','');
   $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerLabel('selectionner le bulletin a supprimer :'));
   $formulaireSuppBulletin->ajouterComposantTab();
   $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerLabel('bulletin :'));
-  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerSelect('idBulletin', 'BulletinSelect', 'selectionner un bulletin', $options));
+  $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin->creerSelect('idBulletin', 'BulletinSelect', 'selectionner un bulletin', $options1));
   $formulaireSuppBulletin->ajouterComposantTab();
   $formulaireSuppBulletin->ajouterComposantLigne($formulaireSuppBulletin-> creerInputSubmit('submitConnex', 'submitConnex', 'supprimer'));
   $formulaireSuppBulletin->ajouterComposantTab();
@@ -186,7 +255,7 @@ else{
 }
 else{
 
-    $tabContrat=$lesContrat->contratUser($user->getidUser());
+    $tabContrat=$lesContratDAO->contratUser($user->getidUser());
 
 }
 //ajout contrat
@@ -201,24 +270,76 @@ if(isset($_POST['Acontrat'])){
 
     $idNewContrat = count($tabContrat) + 1;
 
-    $lesContrat->ajoutContrat($idNewContrat,$_POST['ADateDeb'],$_POST['DateFin'],$_POST['Acontrat'],$_POST['AheureNb'],$idUser);
+    $lesContratDAO->ajoutContrat($idNewContrat,$_POST['ADateDeb'],$_POST['DateFin'],$_POST['Acontrat'],$_POST['AheureNb'],$idUser);
   }
 }
 //ajout bulletin
-if(isset($_POST['BMois'])){
+if(isset($_POST['submitConnexBulletin'])){
+  //verifie si le nom existe dans un contrat
+  if($lesContratDAO->verifSiLeNomExiste($_POST['Bnom']) == false){
+    echo '<script>window.alert("le nom na pas de contrat");</script>';
+  }
+  else{
+    foreach ($lesContratDAO->verifSiLeNomExiste($_POST['Bnom']) as $key => $value) {
 
-  if(isset($_POST['submitConnexBulletin'])){
-    $unUtilisateur = new UtilisateurDAO();
+        if($_POST['Bnom'] == $value){
+          $unUtilisateur = new UtilisateurDAO();
 
-    $idNewBuletin = count($tabBulletin) + 1;
-    foreach ($lesContrat->RecupIDContrat($_POST['Bnom']) as $key => $value){
-      $idUserBulletin = $value;
+          $idNewBuletin = count($tabBulletin) + 1;
+
+          foreach ($lesContratDAO->RecupIDContrat($_POST['Bnom']) as $key => $value){
+            $idUserBulletin = $value;
+          }
+          //ajout du pdf
+          $repertoireDestination = dirname(dirname(__FILE__)) . "\pdf\\";
+          $nomDestation = "bulletin_". date("YmHis") . ".pdf";
+          if(is_uploaded_file($_FILES['Bpdf']['tmp_name'])){
+            rename($_FILES['Bpdf']['tmp_name'], $repertoireDestination . $nomDestation);
+          }
+          $lesBulletinDAO->ajoutBulletin($idNewBuletin,$_POST['BMois'],$_POST['Bannee'],$nomDestation , $idUserBulletin);
+        }
+
+
+
+      }
     }
+  }
 
-    $lesBulletinDAO->ajoutBulletin($idNewBuletin,$_POST['BMois'],$_POST['Bannee'],$_POST['Bpdf'] , $idUserBulletin);
+
+//modificatiob bulletin
+if(isset($_POST['BMois'])){
+    if(isset($_POST['submitConnexBulletinM'])){
+
+
+        $idNewBuletin = count($tabBulletin) + 1;
+        //ajout du pdf
+        $repertoireDestination = dirname(dirname(__FILE__)) . "\pdf\\";
+        $nomDestation = "bulletin_". date("YmHis") . ".pdf";
+        var_dump($_FILES);
+        if(is_uploaded_file($_FILES['Bpdf']['tmp_name'])){
+          rename($_FILES['Bpdf']['tmp_name'], $repertoireDestination . $nomDestation);
+        }
+        $unBulletin=unserialize($_SESSION['unBulletin']);
+        $lesBulletinDAO->updateBulletin($unBulletin->getIdbulletin(),$_POST['BMois'],$_POST['Bannee'], $nomDestation,$unBulletin->getIdContrat() );
+
+
+
 
   }
-  echo "il faut indiquer le nom de famille.";
+}
+//modification contrat
+if(isset($_POST['ADateDebM'])){
+    if(isset($_POST['submitConnexContratM'])){
+
+
+        $unContrat=unserialize($_SESSION['unContrat']);
+        $lesContratDAO->UpdateContrat($unContrat->getIdContrat(),$_POST['ADateDebM'],$_POST['DateFinM'], $_POST['AcontratM'], $_POST['AheureNbM'], $unContrat->getIdUser());
+
+
+
+
+  }
 }
 
 require_once 'vue/vueContrat.php' ;
+//Bulletin update

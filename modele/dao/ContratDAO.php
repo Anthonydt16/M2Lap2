@@ -36,6 +36,15 @@ class ContratDAO extends PDO{
       return $donnee;
   }
 
+  public function contratFindId($idContrat){
+      $requete = DBConnex::getInstance()->prepare("SELECT * FROM contrat where idContrat = :id");
+
+      $requete->bindParam(":id",$idContrat);
+      $requete->execute();
+      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      return $donnee;
+  }
+
   public function contratSupp($idContrat){
 
     $requete = DBConnex::getInstance()->prepare("DELETE FROM `contrat` WHERE `idContrat` = :id");
@@ -75,16 +84,25 @@ class ContratDAO extends PDO{
   }
 
   public function UpdateContrat($idContrat,$dateDebut,$dateFin, $typeContrat, $nbheure, $iduser){
-      $requete = DBConnex::getInstance()->prepare("UPDATE `contrat` SET
-      `idContrat` = :idContrat, `dateDebut` = :dateDebut, `dateFin`=:dateFin, `typeContrat`=:typeContrat, `nbHeures`:=nbHeure, `idUser`=:idUser");
-      $requete->bindParam(":idContrat",$idContrat);
+      $requete = DBConnex::getInstance()->prepare("UPDATE `contrat` SET `dateDebut` = :dateDebut, `dateFin`=:dateFin, `typeContrat`=:typeContrat, `nbHeures`:=:nbHeure, `idUser`=:idUser where idContrat = :idContrat");
+
       $requete->bindParam(":dateDebut",$dateDebut);
       $requete->bindParam(":dateFin",$dateFin);
       $requete->bindParam(":typeContrat",$typeContrat);
       $requete->bindParam(":nbHeure",$nbheure);
       $requete->bindParam(":idUser",$iduser);
+      $requete->bindParam(":idContrat",$idContrat);
       $requete->execute();
 
+  }
+
+  public function verifSiLeNomExiste($nom){
+
+      $requete = DBConnex::getInstance()->prepare("SELECT U.nom FROM utilisateur AS U, contrat AS C where C.idUser = U.idUser AND U.nom = :nom");
+      $requete->bindParam(":nom",$nom);
+      $requete->execute();
+      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      return $donnee;
   }
 
 
