@@ -20,9 +20,9 @@
 
 				echo '<tr>';
 				echo '<form action="index.php?m2lMP=accepterRefuserInscription" method="POST">';
-				echo '<td><input type="hidden" id="idForma" name="idForma" value="'.$key['idForma'].'"/></td>';
+				echo '<input type="hidden" id="idForma" name="idForma" value="'.$key['idForma'].'"/>';
 				echo '<td>'.$key['intitule'].'</td>';
-				echo '<td><input type="hidden" id="idUser" name="idUser" value="'.$key['idUser'].'"/></td>';
+				echo '<input type="hidden" id="idUser" name="idUser" value="'.$key['idUser'].'"/>';
 				echo '<td>'.$key['nom'].'</td>';
 				echo '<td>'.$key['prenom'].'</td>';
 				echo '<td>'.$key['statut'].'</td>';

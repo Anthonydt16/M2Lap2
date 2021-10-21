@@ -37,6 +37,9 @@
 				elseif($etatInscription=='1'){
 					echo '<p class=texteFormationInscrit>État de l\'inscription : Inscrit</p>';
 				}
+				elseif($etatInscription=="2"){
+					echo '<p class=texteFormationRefuse>État de l\'inscription : Refusé</p>';
+				}
         echo '</div>';
 				$testCondition++;
       }

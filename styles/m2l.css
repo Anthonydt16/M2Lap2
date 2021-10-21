@@ -406,6 +406,12 @@ style de la vue formations
 	color: green;
 }
 
+.texteFormationRefuse{
+	margin-top: 3%;
+	text-align: center;
+	color: red;
+}
+
 /*
 Vue formation du point de vue du gestionnaire
 */

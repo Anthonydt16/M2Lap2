@@ -21,7 +21,7 @@ class MesFormationDAO extends PDO{
   }
 
   /*
-  Récupère les formations auxquelles l'utilisateur connecté est inscrit pour lui afficher ses futures formations.
+  Récupère les formations auxquelles l'utilisateur connecté a souhaité s'inscrire pour lui afficher ses futures potentielles formations.
   */
   public function getmesformations($idUser){
     $requeteObtenirMesFormations = DBConnex::getInstance()->prepare("

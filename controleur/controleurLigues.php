@@ -130,4 +130,66 @@
   $formulaireSuppClub->creerFormulaire();
 
 
+
+					//Fonction Ajout Ligue
+					if(isset($_POST['AjoutidLigue'])){
+
+						if(isset($_POST['submitAjoutLigue'])){
+
+							$uneLigue->ajoutLigue($_POST['AjoutidLigue'], $_POST['AjoutNomLigue'], $_POST['AjoutadresseLigue'], $_POST['AjoutDescriptif']);
+
+						}
+					}
+
+					//Fonction supprimer Ligue
+					if(isset($_POST['SupprLigue'])){
+
+						if(isset($_POST['submitSupprLigue'])){
+
+							$uneLigue->suppLigue($_POST['SupprLigue']);
+
+						}
+					}
+
+					//Fonction Modifier Ligue
+					if(isset($_POST['ModifidLigue'])){
+
+						if(isset($_POST['submitModifLigue'])){
+
+							$uneLigue->updateLigue($_POST['ModifidLigue'], $_POST['ModifNomLigue'], $_POST['ModifadresseLigue'], $_POST['ModifDescriptif']);
+
+						}
+					}
+
+					//Fonction Ajout Club
+					if(isset($_POST['AjoutidClub'])){
+
+						if(isset($_POST['submitAjoutClub'])){
+
+							$unClub->ajoutClub($_POST['AjoutidClub'], $_POST['AjoutnomClub'], $_POST['AjoutadresseClub'], $_POST['AjoutidLigueClub'], $_POST['AjoutidCommune']);
+
+						}
+					}
+
+					//Fonction supprimer Club
+					if(isset($_POST['SupprClub'])){
+
+						if(isset($_POST['submitSupprClub'])){
+
+							$unClub->suppClub($_POST['SupprClub']);
+
+						}
+					}
+
+					//Fonction Modifier Club
+					if(isset($_POST['ModifieridClub'])){
+
+						if(isset($_POST['submitModifierClub'])){
+
+							$unClub->updateClub($_POST['ModifieridClub'], $_POST['ModifiernomClub'], $_POST['ModifieradresseClub'], $_POST['ModifieridLigueClub'], $_POST['ModifieridCommune']);
+
+						}
+					}
+					
+					
 	require_once 'vue/vueLigues.php' ;

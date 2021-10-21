@@ -20,11 +20,13 @@ class DemandeFormationDAO extends PDO{
       }
   }
 
-public function getinscriptions(){//récupère toutes les inscriptions qui sont en attentes pour les afficher
+    public function getinscriptions(){//récupère toutes les inscriptions qui sont en attentes pour les afficher
       $requete = DBConnex::getInstance()->prepare("
       SELECT formation.idForma, intitule, nom, prenom, statut, DateInscription, utilisateur.idUser
       FROM inscrire, utilisateur, formation
-      WHERE EtatInscrit = '0' AND inscrire.idForma = formation.idForma AND inscrire.idUser = utilisateur.idUser
+      WHERE EtatInscrit = '0'
+      AND inscrire.idForma = formation.idForma
+      AND inscrire.idUser = utilisateur.idUser
       GROUP BY formation.idForma
       ");
       $requete->execute();

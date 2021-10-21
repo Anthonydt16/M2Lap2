@@ -35,7 +35,8 @@ class AccepterRefuserInscriptionDAO extends PDO{
 
   public function refuserinscription($idUser, $idForma){//fonction qui supprime la demande d'inscription
     $requeteRefuser = DBConnex::getInstance()->prepare("
-    DELETE FROM inscrire
+    UPDATE inscrire
+    SET EtatInscrit = '2'
     WHERE idUser = :idUser
     AND idForma = :idForma
     ");
