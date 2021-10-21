@@ -128,6 +128,8 @@ if(isset($_SESSION['SelectInter'])){
 
       $formulaireModificationInter->creerFormulaire();
     }
+  }
+}
     $formulaireAjoutInter = new Formulaire('post', '', 'AjoutInter', 'AjoutInter','');
 
     $formulaireAjoutInter->ajouterComposantLigne($formulaireAjoutInter->creerLabel('Nom  :'));
@@ -203,7 +205,7 @@ if(isset($_SESSION['SelectInter'])){
     $formulaireAjoutInter->ajouterComposantTab();
 
     $formulaireAjoutInter->creerFormulaire();
-  }
+  
 
     if(isset($_POST['submitValidModif'])){
       if($_POST['idLigue'] == null && $_POST['idClub'] == null){
@@ -237,9 +239,7 @@ if(isset($_SESSION['SelectInter'])){
       }
       $LUtilisateur->ajoutIntervenant($lastIdUser+1,md5($_POST['mdpA']),$_POST['nomA'],$_POST['prenomA'],$_POST['loginA'],$_POST['StatutA'],$_POST['typeUserA'],$_POST['idFonctA'],$_POST['idLigueA'],$_POST['idClubA']);
 
-
-    }
-
 }
+
 
 require_once 'vue/vueIntervenant.php' ;
