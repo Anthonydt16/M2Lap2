@@ -26,7 +26,7 @@ if(isset($_GET['m2lMPModifieC'])){
     $lesContratDAO= new ContratDAO();
     $unContrat= new Contrat();
     $tabunContrat = $lesContratDAO->contratFindId($idContrat);
-    var_dump($tabunContrat);
+    
     $unContrat->hydrate($tabunContrat);
     $_SESSION['unContrat'] = serialize($unContrat);
 
@@ -65,8 +65,8 @@ if(isset($_SESSION['unUtilisateur'])){
   //$leContrat->hydrate($tabContrat);
 }
 else{
-  //sinon contrzt et bulletin perso
-  var_dump($tabBulletin);
+  //sinon contrat et bulletin perso
+
 }
 //formulaire ajout
   $formulaireBulletin = new Formulaire('post', 'index.php', 'fBulletin', 'fBulletin','multipart/form-data');
@@ -315,7 +315,7 @@ if(isset($_POST['BMois'])){
         //ajout du pdf
         $repertoireDestination = dirname(dirname(__FILE__)) . "\pdf\\";
         $nomDestation = "bulletin_". date("YmHis") . ".pdf";
-        var_dump($_FILES);
+
         if(is_uploaded_file($_FILES['Bpdf']['tmp_name'])){
           rename($_FILES['Bpdf']['tmp_name'], $repertoireDestination . $nomDestation);
         }
