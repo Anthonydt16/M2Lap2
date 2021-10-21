@@ -116,19 +116,6 @@ document.getElementById("boutonRetour")
 			}, false);
 
 
-			function OnClick(i){
-
-				document.write(i);
-				var myvalue =<?php echo'teste'; ?>;
-
-				console.log(i);
-
-				var myvalue ="<?php echo $test; ?>";
-
-				document.getElementById('DateFinM').setAttribute('value', myvalue);
-			}
-
-
 
 </script>
 
