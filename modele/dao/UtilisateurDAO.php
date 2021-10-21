@@ -67,9 +67,6 @@ class UtilisateurDAO extends PDO{
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
     }
-<<<<<<< HEAD
-    
-=======
     public function Utilisateurmdp($idUser){
         $requete = DBConnex::getInstance()->prepare("SELECT mdp FROM `utilisateur` where idUser = :idUser ");
         $requete->bindParam(":idUser",$idUser);
@@ -162,5 +159,4 @@ class UtilisateurDAO extends PDO{
 
 
 
->>>>>>> df1d9070a77ef474d05fd4d21552b55b03fb26e0
 }

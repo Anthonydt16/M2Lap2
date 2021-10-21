@@ -115,7 +115,6 @@ document.getElementById("boutonRetour")
 			document.getElementById("invisibleModifBulletin").hidden = true;
 			}, false);
 
-<<<<<<< HEAD
 
 			function OnClick(i){
 
@@ -131,8 +130,6 @@ document.getElementById("boutonRetour")
 
 
 
-=======
->>>>>>> df1d9070a77ef474d05fd4d21552b55b03fb26e0
 </script>
 
 
