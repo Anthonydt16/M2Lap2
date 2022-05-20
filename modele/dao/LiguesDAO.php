@@ -49,7 +49,7 @@ class LigueDAO extends PDO{
 
   }
 
-  public function suppLigue($nomLigue){
+  public function suppLigue($idLigue){
 
       $requete = DBConnex::getInstance()->prepare("DELETE FROM ligue WHERE idLigue = :idLigue");
       $requete->bindParam(":idLigue",$idLigue);
