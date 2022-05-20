@@ -54,8 +54,8 @@ class ClubDAO extends PDO{
 
   public function suppClub($nomClub){
 
-      $requete = DBConnex::getInstance()->prepare("DELETE FROM club WHERE nomClub = :nomClub");
-      $requete->bindParam(":nomClub",$nomClub);
+      $requete = DBConnex::getInstance()->prepare("DELETE FROM club WHERE idClub = :idClub");
+      $requete->bindParam(":idClub",$idClub);
       $requete->execute();
   }
 

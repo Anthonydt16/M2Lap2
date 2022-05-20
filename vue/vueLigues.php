@@ -8,7 +8,7 @@
 
 
 		//Vérification connecter ou non
-		if(isset($_SESSION['unUtilisateur'])){
+		if(isset($_SESSION['identification'])){
 		  $user = unserialize($_SESSION['unUtilisateur']);
 
 			//vérification secrétaire ou non
@@ -18,7 +18,7 @@
 				//Afficher avec bouton modifier, supprimer et ajouter
 				foreach ($tabLigue as $keyL){
 					echo '<div class="Ligue">';
-							echo '<h1>Ligue de '.$keyL['nomLigue'].'</h1>';
+							echo '<h1>'.$keyL['nomLigue'].'</h1>';
 							echo '<p>'.$keyL['descriptif'].'</p>';
 								foreach ($tabClub as $keyC) {
 									if($keyL['idLigue']==$keyC['idLigue']){
@@ -75,7 +75,7 @@
 			else{
 				foreach ($tabLigue as $keyL){
 					echo '<div class="Ligue">';
-					echo '<h1>Ligue de '.$keyL['nomLigue'].'</h1>';
+					echo '<h1>'.$keyL['nomLigue'].'</h1>';
 					echo '<p>'.$keyL['descriptif'].'</p>';
 				foreach ($tabClub as $keyC) {
 					if($keyL['idLigue']==$keyC['idLigue']){
@@ -94,7 +94,7 @@
 			else{
 				foreach ($tabLigue as $keyL){
 					echo '<div class="Ligue">';
-					echo '<h1>Ligue de '.$keyL['nomLigue'].'</h1>';
+					echo '<h1>'.$keyL['nomLigue'].'</h1>';
 					echo '<p>'.$keyL['descriptif'].'</p>';
 				foreach ($tabClub as $keyC) {
 					if($keyL['idLigue']==$keyC['idLigue']){
@@ -106,9 +106,9 @@
 				}
 					echo '</div>';
 				}
-				}
+			}
 
-					
+
 
 
 ?>

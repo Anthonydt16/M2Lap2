@@ -85,7 +85,16 @@ class Formulaire{
 	public function creerSelect($unNom, $unId, $unLabel, $options){
 		$composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
 		foreach ($options as $option){
-			$composant .= "<option value = ".$option.">".$option."</option>";
+			$composant .= "<option value = ".$option['idLigue'].">".$option['nomLigue']."</option>";
+		}
+		$composant .= "</select></td></tr>";
+		return $composant;
+	}
+
+	public function creerSelectclub($unNom, $unId, $unLabel, $Clubs){
+		$composant = "<select name = '" . $unNom . "' id = '" . $unId . "' >";
+		foreach ($Clubs as $Club){
+			$composant .= "<option value = ".$Club['idClub'].">".$Club['nomClub']."</option>";
 		}
 		$composant .= "</select></td></tr>";
 		return $composant;
