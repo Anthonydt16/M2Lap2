@@ -11,7 +11,7 @@
 
 
   //Formulaire Ajouter Ligue
-  $formulaireAjoutLigue = new Formulaire('post', 'index.php', 'fAjoutLigue', 'fAjoutLigue');
+  $formulaireAjoutLigue = new Formulaire('post', 'index.php', 'fAjoutLigue', 'fAjoutLigue', '');
   $formulaireAjoutLigue->ajouterComposantLigne($formulaireAjoutLigue->creerLabel('Ajouter une Ligue'));
   $formulaireAjoutLigue->ajouterComposantTab();
   $formulaireAjoutLigue->ajouterComposantLigne($formulaireAjoutLigue->creerLabel('id Ligue :'));
@@ -32,7 +32,7 @@
   $formulaireAjoutLigue->creerFormulaire();
 
   //Formulaire Supprimer Ligue
-  $formulaireSuppLigue = new Formulaire('post', 'index.php', 'fSupprLigue', 'fSupprLigue');
+  $formulaireSuppLigue = new Formulaire('post', 'index.php', 'fSupprLigue', 'fSupprLigue', '');
   $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerLabel('Supprimer une Ligue (Supprimer tous les clubs dedans)'));
   $formulaireSuppLigue->ajouterComposantTab();
   $formulaireSuppLigue->ajouterComposantLigne($formulaireSuppLigue->creerLabel('Nom de la Ligue à supprimer :'));
@@ -44,7 +44,7 @@
   $formulaireSuppLigue->creerFormulaire();
 
   //Formulaire Modification Ligue
-  $formulaireModifLigue = new Formulaire('post', 'index.php', 'fAjoutLigue', 'fAjoutLigue');
+  $formulaireModifLigue = new Formulaire('post', 'index.php', 'fAjoutLigue', 'fAjoutLigue', '');
   $formulaireModifLigue->ajouterComposantLigne($formulaireModifLigue->creerLabel('Modifier une Ligue'));
   $formulaireModifLigue->ajouterComposantTab();
   $formulaireModifLigue->ajouterComposantTab();
@@ -66,7 +66,7 @@
   $formulaireModifLigue->creerFormulaire();
 
   //Formulaire Ajouter Club
-  $formulaireAjoutClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub');
+  $formulaireAjoutClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub', '');
   $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('Ajouter un club'));
   $formulaireAjoutClub->ajouterComposantTab();
   $formulaireAjoutClub->ajouterComposantTab();
@@ -92,7 +92,7 @@
 
 
   //Formulaire Modifier Club
-  $formulaireModifClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub');
+  $formulaireModifClub = new Formulaire('post', 'index.php', 'fAjoutClub', 'fAjoutClub', '');
   $formulaireModifClub->ajouterComposantLigne($formulaireModifClub->creerLabel('Modifier un club'));
   $formulaireModifClub->ajouterComposantTab();
   $formulaireModifClub->ajouterComposantTab();
@@ -118,7 +118,7 @@
 
 
   //Formulaire Supprimer Club
-  $formulaireSuppClub = new Formulaire('post', 'index.php', 'fSupprClub', 'fSupprClub');
+  $formulaireSuppClub = new Formulaire('post', 'index.php', 'fSupprClub', 'fSupprClub', '');
   $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerLabel('Supprimer un Club'));
   $formulaireSuppClub->ajouterComposantTab();
   $formulaireSuppClub->ajouterComposantLigne($formulaireSuppClub->creerLabel('Nom du Club à supprimer :'));
@@ -190,6 +190,6 @@
 
 						}
 					}
-					
-					
+
+
 	require_once 'vue/vueLigues.php' ;
