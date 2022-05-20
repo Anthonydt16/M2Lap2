@@ -12,7 +12,7 @@ if(isset($_GET['SelectInter'])){
 if(isset($_GET['m2lMP'])){
 	$_SESSION['m2lMP']= $_GET['m2lMP'];
 }
- 
+
 else
 {
 	if(!isset($_SESSION['m2lMP'])){
