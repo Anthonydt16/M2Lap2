@@ -90,7 +90,7 @@
   $formulaireAjoutClub->ajouterComposantLigne($formulaireSuppLigue->creerSelect('AjouterClubLigue', 'AjouterClubLigue', 'Choisissez une Ligue', $uneLigue->getligues()));
   $formulaireAjoutClub->ajouterComposantTab();
   $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerLabel('Commune:'));
-  $formulaireAjoutClub->ajouterComposantLigne($formulaireSuppLigue->creerSelect('AjoutidCommune', 'AjoutidCommune', 'Choisissez une Commune', $uneCommune->getcommune()));
+  $formulaireAjoutClub->ajouterComposantLigne($formulaireSuppLigue->creerSelectcommune('AjoutidCommune', 'AjoutidCommune', 'Choisissez une Commune', $uneCommune->getcommune()));
   $formulaireAjoutClub->ajouterComposantTab();
   $formulaireAjoutClub->ajouterComposantLigne($formulaireAjoutClub->creerInputSubmit('submitAjoutClub', 'submitAjoutClub', 'Valider'));
   $formulaireAjoutClub->ajouterComposantTab();
