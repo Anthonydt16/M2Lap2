@@ -100,6 +100,15 @@ class Formulaire{
 		return $composant;
 	}
 
+	public function creerSelectcommune($unNom, $unId, $unLabel, $Communes){
+		$composant = "<select name = '" . $unNom . "' id = '" . $unId . "' >";
+		foreach ($Communes as $Commune){
+			$composant .= "<option value = ".$Commune['idCommune'].">".$Commune['Libelle']."</option>";
+		}
+		$composant .= "</select></td></tr>";
+		return $composant;
+	}
+
 	public function creerInputSubmit($unNom, $unId, $uneValue){
 		$composant = "<input type = 'submit' name = '" . $unNom . "' id = '" . $unId . "' ";
 		$composant .= "value = '" . $uneValue . "'/> ";
